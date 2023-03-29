@@ -1,0 +1,11 @@
+@import '/src/sass/colors';
+
+.Login-Page {
+    width: 100%;
+    padding: 10vw 5vw;
+
+    form {
+        flex-direction: column;
+        gap: 5vw;
+    }
+}
