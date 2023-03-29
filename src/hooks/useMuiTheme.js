@@ -18,9 +18,8 @@ export const useMuiTheme = () => {
 
             },
             secondary: {
-                main: COLORS.secondary,
-
-            }, 
+                main: '#fff',
+            },
             // success: {
 
             // }

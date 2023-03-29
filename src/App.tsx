@@ -3,6 +3,7 @@ import { Routes, BrowserRouter, Route } from 'react-router-dom';
 import { Login } from './dashboard/pages/Login';
 import { useMuiTheme } from './hooks/useMuiTheme';
 import { ThemeProvider } from '@mui/material';
+import { Dashboard } from './dashboard/pages/Dashboard';
 
 const App = () => {
     const muiTheme = useMuiTheme()
@@ -12,8 +13,8 @@ const App = () => {
 
             <BrowserRouter>
                 <Routes>
-                    <Route index element={<Login />} />
-                    <Route path='/login' element={<Login />} />
+                    <Route index element={<Dashboard />} />
+                    <Route path='/dashboard/*' element={<Dashboard />} />
                 </Routes>
             </BrowserRouter>
 
