@@ -50,6 +50,7 @@ export const NewProduct = () => {
                             inputRef={ref}
                             {...props}
                             label='Preço'
+                            inputProps={{inputMode: 'numeric'}}
                         />
                         )}
                     />
