@@ -4,6 +4,7 @@ import { Form, Formik } from 'formik';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import MaskedInput from 'react-text-mask';
+import { api } from '../../../../api';
 import { useCurrencyMask } from '../../../../common/hooks/useCurrencyMask';
 import './style.scss';
 
@@ -24,7 +25,11 @@ export const NewProduct = () => {
     }
 
     const handleSubmit = (values:formValues) => {
-        alert(JSON.stringify(values, null, 4))
+        api.post('/products/new', values)
+        .then(response => {
+            navigate('/dashboard/panel')
+        })
+        .catch(error => console.error(error))
     }
     
     return (
@@ -45,6 +50,7 @@ export const NewProduct = () => {
                             inputRef={ref}
                             {...props}
                             label='Preço'
+                            inputProps={{inputMode: 'numeric'}}
                         />
                         )}
                     />

@@ -7,8 +7,15 @@
     background-color: $background-color;
     flex-direction: column;
     gap: 10vw;
+    overflow-y: scroll;
 
     .header {
-        justify-content: flex-end;
+        justify-content: space-between;
+        align-items: center;
+        color: $primary-color;
+
+        .title {
+        }
+
     }
 }
