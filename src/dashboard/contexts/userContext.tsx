@@ -10,7 +10,7 @@ export interface User {
 
 interface UserContextValue {
     value: User | null;
-    setValue: (value:User) => void;
+    setValue: (value:User|null) => void;
 }
 
 const UserContext = createContext<UserContextValue>({} as UserContextValue)
@@ -28,7 +28,7 @@ export const UserProvider:React.FC<UserProviderProps> = ({children}) => {
 
     useEffect(() => {
         if (!value) navigate('/dashboard/login')
-        
+
         console.log(value)
     }, [value])
 
