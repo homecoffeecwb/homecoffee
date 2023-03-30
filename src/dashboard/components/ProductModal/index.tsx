@@ -1,6 +1,8 @@
 import { DialogTitle } from '@mui/material';
 import { DialogContent } from '@mui/material';
 import { TextField } from '@mui/material';
+import { Alert } from '@mui/material';
+import { Snackbar } from '@mui/material';
 import { Button } from '@mui/material';
 import { CircularProgress } from '@mui/material';
 import { DialogActions } from '@mui/material';
@@ -29,6 +31,7 @@ interface formValues {
 
 export const ProductModal:React.FC<ProductModalProps> = ({ product, open, setOpen }) => {
     const [loading, setLoading] = useState(false)
+    const [success, setSuccess] = useState(false)
     const currencyMask = useCurrencyMask()
     const colors = useColors()
     const { refreshProducts } = useProducts()
@@ -41,47 +44,58 @@ export const ProductModal:React.FC<ProductModalProps> = ({ product, open, setOpe
 
     const handleSubmit = (values:formValues) => {
         api.post('/products/update', {...values, id: product.id})
-        .then(response => setOpen(false))
+        .then(response => {
+            console.log(response.data)
+            setOpen(false)
+            setSuccess(true)
+            refreshProducts()
+        })
         .catch(error => console.error(error))
-        .finally(() => refreshProducts())
     }
     
     return (
-        <Dialog open={open} onClose={() => setOpen(false)} PaperProps={{style:{width: '100%', backgroundColor: colors.background}}}
-            // disableEscapeKeyDown={true}
-            // hideBackdrop={true}
-            
-        >
-            <DialogTitle>Editar produto</DialogTitle>
-            <Formik initialValues={initialValues} onSubmit={handleSubmit}>
-                {({values, handleChange}) => 
-                <Form style={{display: 'contents'}} >
-                <DialogContent sx={{flexDirection: 'column'}}>
-                    <TextField label='Nome' id='name' value={values.name} onChange={handleChange} variant='standard' />
-                    <TextField label='Descrição' id='description' value={values.description} onChange={handleChange} variant='standard' />
-                    <MaskedInput
-                        mask={currencyMask}
-                        id='price'
-                        value={values.price}
-                        onChange={handleChange}
-                        render={(ref, props) => (
-                        <TextField
-                            inputRef={ref}
-                            {...props}
-                            label='Preço'
-                            variant='standard'
-                            inputProps={{inputMode: 'numeric'}}
+        <>
+            <Dialog open={open} onClose={() => setOpen(false)} PaperProps={{style:{width: '100%', backgroundColor: colors.background}}}
+                // disableEscapeKeyDown={true}
+                // hideBackdrop={true}
+                
+            >
+                <DialogTitle>Editar produto</DialogTitle>
+                <Formik initialValues={initialValues} onSubmit={handleSubmit}>
+                    {({values, handleChange}) => 
+                    <Form style={{display: 'contents'}} >
+                    <DialogContent sx={{flexDirection: 'column'}}>
+                        <TextField label='Nome' id='name' value={values.name} onChange={handleChange} variant='standard' />
+                        <TextField label='Descrição' id='description' value={values.description} onChange={handleChange} variant='standard' />
+                        <MaskedInput
+                            mask={currencyMask}
+                            id='price'
+                            value={values.price}
+                            onChange={handleChange}
+                            render={(ref, props) => (
+                            <TextField
+                                inputRef={ref}
+                                {...props}
+                                label='Preço'
+                                variant='standard'
+                                inputProps={{inputMode: 'numeric'}}
+                            />
+                            )}
                         />
-                        )}
-                    />
-                </DialogContent>
-                <DialogActions>
-                    <Button type='submit' variant='contained' sx={{width: '100%'}} >{loading ? 
-                    <CircularProgress size={24} />
-                        : 'OK'}</Button>
-                </DialogActions>
-            </Form>}
-            </Formik>
-        </Dialog>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button type='submit' variant='contained' sx={{width: '100%'}} >{loading ? 
+                        <CircularProgress size={24} />
+                            : 'OK'}</Button>
+                    </DialogActions>
+                </Form>}
+                </Formik>
+            </Dialog>
+            <Snackbar open={success} autoHideDuration={3000} onClose={() => setSuccess(false)} anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}>
+                <Alert onClose={() => setSuccess(false)} severity={'success'} sx={{ width: '100%' }}>
+                    {product.name} atualizado!
+                </Alert>
+            </Snackbar>
+        </>
     )
 }
