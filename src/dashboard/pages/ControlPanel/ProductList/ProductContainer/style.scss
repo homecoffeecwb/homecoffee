@@ -1,0 +1,29 @@
+@import '/src/sass/colors';
+
+.ProductContainer-Component {
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2vw;
+
+    .main-container {
+        width: 100%;
+        background-color: darken($background-color, 10);
+        padding: 3vw;
+        justify-content: space-between;
+        align-items: center;
+        gap: 5vw;
+
+        .info {
+            flex: 1;
+            justify-content: space-between;
+        }
+
+        .actions {
+            // flex: 0.4;
+            gap: 5vw;
+            justify-content: space-between;
+        }
+
+    }
+}

@@ -5,4 +5,10 @@
     height: 100vh;
     padding: 10vw 5vw;
     background-color: $background-color;
+    flex-direction: column;
+    gap: 10vw;
+
+    .header {
+        justify-content: flex-end;
+    }
 }

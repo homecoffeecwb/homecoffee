@@ -5,19 +5,23 @@ import { Routes, BrowserRouter, Route } from 'react-router-dom';
 import { useMuiTheme } from './hooks/useMuiTheme';
 import { ThemeProvider } from '@mui/material';
 import { Dashboard } from './dashboard/pages/Dashboard';
+import { ProductsProvider } from './common/contexts/productsContext';
 
 const App = () => {
     const muiTheme = useMuiTheme()
 
     return (
         <ThemeProvider theme={muiTheme}>
+            <ProductsProvider>
 
-            <BrowserRouter>
-                <Routes>
-                    <Route index element={<Dashboard />} />
-                    <Route path='/dashboard/*' element={<Dashboard />} />
-                </Routes>
-            </BrowserRouter>
+                <BrowserRouter>
+                    <Routes>
+                        <Route index element={<Dashboard />} />
+                        <Route path='/dashboard/*' element={<Dashboard />} />
+                    </Routes>
+                </BrowserRouter>
+                
+            </ProductsProvider>
 
         </ThemeProvider>
     )

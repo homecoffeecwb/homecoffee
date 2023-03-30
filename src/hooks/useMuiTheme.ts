@@ -27,10 +27,7 @@ export const useMuiTheme = () => {
                 // disabled: COLORS.primary,
             },
             error: {
-                main: '#d32f2f',
-                light: '#ef5350',
-                dark: '#c62828',
-                contrastText: '#fff'
+                main: COLORS.red,
             }
         }
     })

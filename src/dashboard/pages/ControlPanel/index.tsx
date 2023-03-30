@@ -1,7 +1,10 @@
+import { Button } from '@mui/material';
 import React from 'react';
 import { useEffect } from 'react'
-import { useNavigate } from 'react-router-dom';
+import { Route, useNavigate } from 'react-router-dom';
+import ReactSlideRoutes from 'react-slide-routes';
 import { useUser } from '../../hooks/useUser';
+import { ProductList } from './ProductList';
 import './style.scss';
 
 export const ControlPanel = () => {
@@ -9,12 +12,17 @@ export const ControlPanel = () => {
     const navigate = useNavigate()
 
     useEffect(() => {
-        if (!user) navigate('/dashboard/login')
+        
     }, [])
     
     return (
         <div className='ControlPanel-Page' >
-            
+            <div className="header">
+                <Button onClick={() => setUser(null)} variant='outlined' >Sair</Button>
+            </div>
+            <ReactSlideRoutes duration={1000}>
+                <Route index element={<ProductList />} />
+            </ReactSlideRoutes>
         </div>
     )
 }

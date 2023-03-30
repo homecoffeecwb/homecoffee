@@ -17,7 +17,7 @@ export const Dashboard = () => {
             <SlideRoutes duration={1000}>
                 <Route index element={<ControlPanel />} />
                 <Route path='/login' element={<Login />} />
-                <Route path='/panel' element={<ControlPanel />} />
+                <Route path='/panel/*' element={<ControlPanel />} />
             </SlideRoutes>
             
         </UserProvider>
