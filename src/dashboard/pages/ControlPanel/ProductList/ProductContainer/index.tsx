@@ -7,6 +7,7 @@ import './style.scss';
 import { useCurrencyMask } from '../../../../../common/hooks/useCurrencyMask';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
+import { IconButton } from '@mui/material';
 
 interface ProductsContainerProps {
     product: Product
@@ -35,8 +36,12 @@ export const ProductContainer:React.FC<ProductsContainerProps> = ({ product }) =
                     )}
                 /> */}
                 <div className="actions">
-                    <EditIcon />
-                    <DeleteIcon color='error' /> 
+                    <IconButton color='primary' >
+                        <EditIcon />
+                    </IconButton>
+                    <IconButton color='primary' >
+                        <DeleteIcon color='error' /> 
+                    </IconButton>
                 </div>
             </Paper>
         </div>
