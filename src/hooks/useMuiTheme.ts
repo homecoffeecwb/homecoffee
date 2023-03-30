@@ -1,3 +1,4 @@
+import { makeStyles } from "@mui/material";
 import { createTheme } from "@mui/material"
 import { useColors } from "./useColors"
 
@@ -16,20 +17,21 @@ export const useMuiTheme = () => {
 
             primary: {
                 main: COLORS.primary,
-                dark: COLORS.primary,
-                light: COLORS.primary,
             },
             secondary: {
                 main: '#fff',
             },
-            // text: {
-            //     primary: COLORS.primary,
-            //     secondary: COLORS.primary,
+            text: {
+                primary: COLORS.primary,
+                // secondary: COLORS.primary,
                 // disabled: COLORS.primary,
-            // }
-            // success: {
-
-            // }
+            },
+            error: {
+                main: '#d32f2f',
+                light: '#ef5350',
+                dark: '#c62828',
+                contrastText: '#fff'
+            }
         }
     })
     

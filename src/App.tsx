@@ -1,4 +1,5 @@
 import './sass/App.scss';
+import './sass/mui.scss';
 import React from 'react'
 import { Routes, BrowserRouter, Route } from 'react-router-dom';
 import { useMuiTheme } from './hooks/useMuiTheme';

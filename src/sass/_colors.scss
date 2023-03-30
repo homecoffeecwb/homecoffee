@@ -1,6 +1,6 @@
 $primary-color: #316664;
 $secondary-color: #B35F32;
-$background-color: #FFDBC7;
+$background-color: lighten(#FFDBC7, 5);
 
 :export {
     primary: $primary-color;
