@@ -4,8 +4,12 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 export interface User {
-    name: string
+    id: number
+    username: string
     password: string
+    name: string
+    email: string
+    role: string
 }
 
 interface UserContextValue {
