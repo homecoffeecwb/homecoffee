@@ -19,6 +19,7 @@ export const ControlPanel = () => {
     return (
         <div className='ControlPanel-Page' >
             <div className="header">
+                <h3 className='title'>Dashboard</h3>
                 <Button onClick={() => setUser(null)} variant='outlined' >Sair</Button>
             </div>
             <ReactSlideRoutes duration={1000}>
