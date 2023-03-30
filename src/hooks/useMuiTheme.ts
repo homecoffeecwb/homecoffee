@@ -16,11 +16,17 @@ export const useMuiTheme = () => {
 
             primary: {
                 main: COLORS.primary,
-
+                dark: COLORS.primary,
+                light: COLORS.primary,
             },
             secondary: {
                 main: '#fff',
             },
+            // text: {
+            //     primary: COLORS.primary,
+            //     secondary: COLORS.primary,
+                // disabled: COLORS.primary,
+            // }
             // success: {
 
             // }
