@@ -1,10 +1,12 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { TextField } from '@mui/material';
 import Button from '@mui/material/Button';
 import { CircularProgress } from "@mui/material"
 import { Formik, Form } from 'formik';
+import type { FormikHelpers } from 'formik';
 import { api } from '../../../api';
 import './style.scss';
+import { useUser } from '../../hooks/useUser';
 
 interface formValues {
     user: string
@@ -14,18 +16,24 @@ interface formValues {
 export const Login = () => {
     const [loading, setLoading] = useState(false)
 
+    const { setUser } = useUser()
+
     const initialValues:formValues = {
         user: '',
         password: ''
     }
 
-    const handleSubmit = (values:formValues) => {
+    const handleSubmit = React.useCallback((values:formValues, helpers: FormikHelpers<formValues>) => {
+        if (loading) return;
         setLoading(true)
+
         api.post('/login', values)
-        .then(response => console.log(response.data))
+        .then(response => {
+            setUser(response.data)
+        })
         .catch(error => console.error(error))
         .finally(() => setLoading(false))
-    }
+    }, [loading])
     
     return (
         <div className='Login-Page' >

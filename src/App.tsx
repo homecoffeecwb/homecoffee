@@ -1,6 +1,6 @@
 import './sass/App.scss';
+import React from 'react'
 import { Routes, BrowserRouter, Route } from 'react-router-dom';
-import { Login } from './dashboard/pages/Login';
 import { useMuiTheme } from './hooks/useMuiTheme';
 import { ThemeProvider } from '@mui/material';
 import { Dashboard } from './dashboard/pages/Dashboard';
