@@ -7,6 +7,7 @@ import type { FormikHelpers } from 'formik';
 import { api } from '../../../api';
 import './style.scss';
 import { useUser } from '../../hooks/useUser';
+import { useNavigate } from 'react-router-dom';
 
 interface formValues {
     user: string
@@ -17,6 +18,7 @@ export const Login = () => {
     const [loading, setLoading] = useState(false)
 
     const { setUser } = useUser()
+    const navigate = useNavigate()
 
     const initialValues:formValues = {
         user: '',
@@ -29,7 +31,10 @@ export const Login = () => {
 
         api.post('/login', values)
         .then(response => {
-            setUser(response.data)
+            if(response.data) {
+                setUser(response.data)
+                navigate('/dashboard/panel')
+            }
         })
         .catch(error => console.error(error))
         .finally(() => setLoading(false))

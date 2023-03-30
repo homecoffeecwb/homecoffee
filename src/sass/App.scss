@@ -74,7 +74,7 @@ img {
 }
 
 ::placeholder {
-    // color: darken($background-color, 20);
+    color: darken($background-color, 20);
     opacity: 1;
 }
   
@@ -100,4 +100,11 @@ img {
 /* Corner */
 ::-webkit-scrollbar-corner {
     display: none;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active{
+    -webkit-box-shadow: 0 0 0 30px lighten($background-color, 7) inset !important;
 }
