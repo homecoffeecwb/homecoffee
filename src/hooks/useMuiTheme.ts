@@ -1,7 +1,9 @@
+import { makeStyles } from "@mui/material";
 import { createTheme } from "@mui/material"
-import COLORS from '../sass/_colors.scss'
+import { useColors } from "./useColors"
 
 export const useMuiTheme = () => {
+    const COLORS = useColors()
     const THEME = createTheme({
         typography: {
         //  "fontFamily": ["Poppins"].join(','),
@@ -15,14 +17,18 @@ export const useMuiTheme = () => {
 
             primary: {
                 main: COLORS.primary,
-
             },
             secondary: {
                 main: '#fff',
             },
-            // success: {
-
-            // }
+            text: {
+                primary: COLORS.primary,
+                // secondary: COLORS.primary,
+                // disabled: COLORS.primary,
+            },
+            error: {
+                main: COLORS.red,
+            }
         }
     })
     
