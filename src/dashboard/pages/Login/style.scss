@@ -11,5 +11,14 @@
         flex-direction: column;
         gap: 5vw;
         color: $primary-color;
+
+        .logo {
+            width: 100%;
+            height: auto;
+        }
+
+        .title {
+            align-self: center;
+        }
     }
 }

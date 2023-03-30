@@ -55,7 +55,8 @@ export const Login = () => {
             <Formik initialValues={initialValues} onSubmit={handleSubmit}>
                 {({values, handleChange}) => 
                 <Form>
-                    <h2>painel de controle</h2>
+                    <img className='logo' src='/images/logo.png' alt='logo.png' />
+                    {/* <h2 className='title' >login</h2> */}
                     <TextField label='usuário ou e-mail' id='user' value={values.user} onChange={handleChange} color='primary' />
                     <TextField label='senha' type='password' id='password' value={values.password} onChange={handleChange} />
                     <Button type='submit' variant="contained" >
