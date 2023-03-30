@@ -8,12 +8,19 @@ import { useCurrencyMask } from '../../../../../common/hooks/useCurrencyMask';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { IconButton } from '@mui/material';
+import { ProductModal } from '../../../../components/ProductModal';
+import { useState } from 'react';
 
 interface ProductsContainerProps {
     product: Product
 }
 
 export const ProductContainer:React.FC<ProductsContainerProps> = ({ product }) => {
+    const [editModal, setEditModal] = useState(false)
+
+    const editProduct = () => {
+        setEditModal(true)
+    }
     
     return (
         <div className='ProductContainer-Component' >
@@ -24,7 +31,7 @@ export const ProductContainer:React.FC<ProductsContainerProps> = ({ product }) =
                 </div>
                 
                 <div className="actions">
-                    <IconButton color='primary' >
+                    <IconButton color='primary' onClick={() => editProduct()} >
                         <EditIcon />
                     </IconButton>
                     <IconButton color='primary' >
@@ -32,6 +39,7 @@ export const ProductContainer:React.FC<ProductsContainerProps> = ({ product }) =
                     </IconButton>
                 </div>
             </Paper>
+            <ProductModal product={product} open={editModal} setOpen={setEditModal} />
         </div>
     )
 }
