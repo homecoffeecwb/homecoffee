@@ -1,0 +1,11 @@
+@import '/src/sass/colors';
+
+.NewProduct-Component {
+    width: 100%;
+
+    form {
+        flex-direction: column;
+        gap: 5vw;
+        color: $primary-color;
+    }
+}

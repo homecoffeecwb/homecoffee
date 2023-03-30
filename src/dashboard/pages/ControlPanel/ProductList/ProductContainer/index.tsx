@@ -14,7 +14,6 @@ interface ProductsContainerProps {
 }
 
 export const ProductContainer:React.FC<ProductsContainerProps> = ({ product }) => {
-    const currencyMask = useCurrencyMask()
     
     return (
         <div className='ProductContainer-Component' >
@@ -23,18 +22,7 @@ export const ProductContainer:React.FC<ProductsContainerProps> = ({ product }) =
                     <p>{product.name}</p>
                     <p style={{fontWeight: 'bold'}}>R$ {product.price}</p>
                 </div>
-                {/* <MaskedInput
-                    mask={currencyMask}
-                    render={(ref, props) => (
-                        <TextField
-                            inputRef={ref}
-                            {...props}
-                            className='price-container'
-                            size='small'
-                            inputProps={{style:{padding: '1vw', textAlign: 'center'}}}
-                        />
-                    )}
-                /> */}
+                
                 <div className="actions">
                     <IconButton color='primary' >
                         <EditIcon />

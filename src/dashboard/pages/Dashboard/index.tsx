@@ -8,8 +8,6 @@ import { UserProvider } from '../../contexts/userContext';
 
 export const Dashboard = () => {
 
-    const location = useLocation()
-    
     return (
         <>
         <UserProvider>
