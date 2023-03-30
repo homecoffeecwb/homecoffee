@@ -10,6 +10,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import { IconButton } from '@mui/material';
 import { ProductModal } from '../../../../components/ProductModal';
 import { useState } from 'react';
+import { useColors } from '../../../../../hooks/useColors';
 
 interface ProductsContainerProps {
     product: Product
@@ -17,6 +18,7 @@ interface ProductsContainerProps {
 
 export const ProductContainer:React.FC<ProductsContainerProps> = ({ product }) => {
     const [editModal, setEditModal] = useState(false)
+    const colors = useColors()
 
     const editProduct = () => {
         setEditModal(true)
@@ -27,7 +29,7 @@ export const ProductContainer:React.FC<ProductsContainerProps> = ({ product }) =
             <Paper elevation={1} className='main-container' >
                 <div className="info">
                     <p>{product.name}</p>
-                    <p style={{fontWeight: 'bold'}}>R$ {product.price}</p>
+                    <p style={{color: colors.primary2}}>R$ {product.price}</p>
                 </div>
                 
                 <div className="actions">
