@@ -9,8 +9,10 @@ import { Form, Formik } from 'formik';
 import React from 'react';
 import { useState } from 'react';
 import MaskedInput from 'react-text-mask';
+import { api } from '../../../api';
 import { Product } from '../../../common/contexts/productsContext';
 import { useCurrencyMask } from '../../../common/hooks/useCurrencyMask';
+import { useProducts } from '../../../common/hooks/useProducts';
 import { useColors } from '../../../hooks/useColors';
 
 interface ProductModalProps {
@@ -29,6 +31,7 @@ export const ProductModal:React.FC<ProductModalProps> = ({ product, open, setOpe
     const [loading, setLoading] = useState(false)
     const currencyMask = useCurrencyMask()
     const colors = useColors()
+    const { refreshProducts } = useProducts()
 
     const initialValues:formValues = {
         name: product?.name || '',
@@ -37,7 +40,10 @@ export const ProductModal:React.FC<ProductModalProps> = ({ product, open, setOpe
     }
 
     const handleSubmit = (values:formValues) => {
-        console.log(values)
+        api.post('/products/update', {...values, id: product.id})
+        .then(response => setOpen(false))
+        .catch(error => console.error(error))
+        .finally(() => refreshProducts())
     }
     
     return (
@@ -64,6 +70,7 @@ export const ProductModal:React.FC<ProductModalProps> = ({ product, open, setOpe
                             {...props}
                             label='Preço'
                             variant='standard'
+                            inputProps={{inputMode: 'numeric'}}
                         />
                         )}
                     />
