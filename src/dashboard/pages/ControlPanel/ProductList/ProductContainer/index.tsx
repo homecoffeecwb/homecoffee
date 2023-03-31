@@ -13,6 +13,8 @@ import { useProducts } from '../../../../../common/hooks/useProducts';
 import { useSnackbar } from '../../../../hooks/useSnackbar';
 import CurrencyFormat from 'react-currency-format';
 import { CurrencyText } from '../../../../../common/components/CurrencyText';
+import { DeleteConfirm } from './DeleteConfirm';
+import { useEffect } from 'react';
 
 interface ProductsContainerProps {
     product: Product
@@ -24,22 +26,32 @@ export const ProductContainer:React.FC<ProductsContainerProps> = ({ product }) =
     const snackbar = useSnackbar()
     
     const [editModal, setEditModal] = useState(false)
+    const [deleteModal, setDeleteModal] = useState(false)
+    const [confirmDeletion, setConfirmDeletion] = useState(false)
 
     const editProduct = () => {
         setEditModal(true)
     }
 
     const deleteProduct = () => {
-        api.post('/products/delete', product)
-        .then(response => {
-            snackbar({
-                text: `produto ${product.name} deletado!`,
-                severity: 'warning'
-            })
-        })
-        .catch(error => console.error(error))
-        .finally(() => refreshProducts())
+        setDeleteModal(true)
     }
+
+    useEffect(() => {
+        if (confirmDeletion) {
+            setConfirmDeletion(false)
+
+            api.post('/products/delete', product)
+            .then(response => {
+                snackbar({
+                    text: `produto ${product.name} deletado!`,
+                    severity: 'warning'
+                })
+            })
+            .catch(error => console.error(error))
+            .finally(() => refreshProducts())
+        }
+    }, [confirmDeletion])
     
     return (
         <div className='ProductContainer-Component' >
@@ -60,6 +72,7 @@ export const ProductContainer:React.FC<ProductsContainerProps> = ({ product }) =
                 </div>
             </Paper>
             <ProductModal product={product} open={editModal} setOpen={setEditModal} />
+            <DeleteConfirm open={deleteModal} setOpen={setDeleteModal} confirm={setConfirmDeletion} />
         </div>
     )
 }
