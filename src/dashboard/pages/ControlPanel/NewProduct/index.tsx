@@ -8,6 +8,7 @@ import MaskedInput from 'react-text-mask';
 import { api } from '../../../../api';
 import { useCategories } from '../../../../common/hooks/useCategories';
 import { useCurrencyMask } from '../../../../common/hooks/useCurrencyMask';
+import { useSnackbar } from '../../../hooks/useSnackbar';
 import './style.scss';
 
 interface formValues {
@@ -21,6 +22,7 @@ export const NewProduct = () => {
     const currencyMask = useCurrencyMask()
     const navigate = useNavigate()
     const categories = useCategories()
+    const snackbar = useSnackbar()
 
     const initialValues:formValues = {
         name: '',
@@ -33,6 +35,10 @@ export const NewProduct = () => {
         api.post('/products/new', values)
         .then(response => {
             navigate('/dashboard/panel')
+            snackbar({
+                text: `${values.name} cadastrado!`,
+                severity: 'success'
+            })
         })
         .catch(error => console.error(error))
     }

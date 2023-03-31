@@ -53,6 +53,10 @@ export const ProductModal:React.FC<ProductModalProps> = ({ product, open, setOpe
             console.log(response.data)
             setOpen(false)
             refreshProducts()
+            snackbar({
+                text: `${product.name} atualizado!`,
+                severity: 'success'
+            })
         })
         .catch(error => console.error(error))
     }

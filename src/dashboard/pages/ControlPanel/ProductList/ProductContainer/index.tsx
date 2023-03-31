@@ -1,10 +1,7 @@
-import { TextField } from '@mui/material';
 import { Paper } from '@mui/material';
 import React from 'react';
 import type { Product } from '../../../../../common/contexts/productsContext';
-import MaskedInput from 'react-text-mask';
 import './style.scss';
-import { useCurrencyMask } from '../../../../../common/hooks/useCurrencyMask';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { IconButton } from '@mui/material';
@@ -14,6 +11,8 @@ import { useColors } from '../../../../../hooks/useColors';
 import { api } from '../../../../../api';
 import { useProducts } from '../../../../../common/hooks/useProducts';
 import { useSnackbar } from '../../../../hooks/useSnackbar';
+import CurrencyFormat from 'react-currency-format';
+import { CurrencyText } from '../../../../../common/components/CurrencyText';
 
 interface ProductsContainerProps {
     product: Product
@@ -47,7 +46,8 @@ export const ProductContainer:React.FC<ProductsContainerProps> = ({ product }) =
             <Paper elevation={1} className='main-container' >
                 <div className="info">
                     <p>{product.name}</p>
-                    <p style={{color: colors.primary2}}>R$ {product.price}</p>
+                    <CurrencyText value={product.price} />
+                    
                 </div>
                 
                 <div className="actions">
