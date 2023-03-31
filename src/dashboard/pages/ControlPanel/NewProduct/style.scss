@@ -9,3 +9,12 @@
         color: $primary-color;
     }
 }
+
+@media (orientation: landscape) {
+    .NewProduct-Component {
+        padding-top: 5vw;
+        form {
+            gap: 1vw;
+        }
+    }
+}
