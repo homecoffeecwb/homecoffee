@@ -25,7 +25,7 @@ export const ControlPanel = () => {
     return (
         <div className='ControlPanel-Page' >
             <div className="header">
-                <h3 className='title'>Dashboard</h3>
+                <h3 className='title'>Painel de controle</h3>
                 <Button onClick={() => setUser(null)} variant='outlined' >Sair</Button>
             </div>
             <Snackbar open={snackbar.open} autoHideDuration={3000} onClose={() => snackbar.setOpen(false)} anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}>
