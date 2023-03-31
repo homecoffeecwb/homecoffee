@@ -1,3 +1,5 @@
+@import '/src/sass/colors';
+
 .MuiAlert-standardError {
     background-color: darken(rgb(211, 47, 47), 10);
     color: white;
@@ -9,4 +11,8 @@
 
 .MuiDialog-container {
     width: 100%;
+}
+
+.MuiMenu-paper {
+    background-color: darken($background-color, 2) !important;
 }
