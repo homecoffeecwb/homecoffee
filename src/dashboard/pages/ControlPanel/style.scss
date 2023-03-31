@@ -2,7 +2,7 @@
 
 .ControlPanel-Page {
     width: 100%;
-    height: 100vh;
+    min-height: 100vh;
     padding: 10vw 5vw;
     background-color: $background-color;
     flex-direction: column;
