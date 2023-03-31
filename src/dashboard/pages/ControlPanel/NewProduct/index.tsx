@@ -49,8 +49,16 @@ export const NewProduct = () => {
                 {({values, handleChange}) => 
                 <Form>
                     <h3 style={{textAlign: 'center'}}>Cadastrar novo produto</h3>
+                    <TextField select id='category' name='category' label='Categoria' onChange={handleChange} value={values.category} >
+                        {categories.map(category => <MenuItem key={category.id}
+                            value={category.id}
+                            style={{width: '100%'}}
+                        >{category.name}</MenuItem>)}
+                    </TextField>
+
                     <TextField label='Nome' id='name' value={values.name} onChange={handleChange} />
                     <TextField label='Descrição' id='description' value={values.description} onChange={handleChange} />
+
                     <MaskedInput
                         mask={currencyMask}
                         id='price'
@@ -65,12 +73,6 @@ export const NewProduct = () => {
                         />
                         )}
                     />
-                    <TextField select id='category' name='category' label='Categoria' onChange={handleChange} value={values.category} >
-                        {categories.map(category => <MenuItem key={category.id}
-                            value={category.id}
-                            style={{width: '100%'}}
-                        >{category.name}</MenuItem>)}
-                    </TextField>
 
                     <Button type='submit' variant='contained' >Cadastrar</Button>
                     <Button onClick={() => navigate('/dashboard/panel')} variant='outlined' >Cancelar</Button>

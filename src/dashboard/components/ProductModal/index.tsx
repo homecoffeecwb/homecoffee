@@ -74,8 +74,17 @@ export const ProductModal:React.FC<ProductModalProps> = ({ product, open, setOpe
                     {({values, handleChange}) => 
                     <Form style={{display: 'contents'}} >
                     <DialogContent sx={{flexDirection: 'column', gap: '2vw'}}>
+
+                        <TextField select id='category' name='category' label='Categoria' onChange={handleChange} value={values.category} variant='standard' >
+                            {categories.map(category => <MenuItem key={category.id}
+                                value={category.id}
+                                style={{width: '100%'}}
+                            >{category.name}</MenuItem>)}
+                        </TextField>
+
                         <TextField label='Nome' id='name' value={values.name} onChange={handleChange} variant='standard' />
                         <TextField label='Descrição' id='description' value={values.description} onChange={handleChange} variant='standard' />
+                        
                         <MaskedInput
                             mask={currencyMask}
                             id='price'
@@ -91,12 +100,6 @@ export const ProductModal:React.FC<ProductModalProps> = ({ product, open, setOpe
                             />
                             )}
                         />
-                        <TextField select id='category' name='category' label='Categoria' onChange={handleChange} value={values.category} variant='standard' >
-                            {categories.map(category => <MenuItem key={category.id}
-                                value={category.id}
-                                style={{width: '100%'}}
-                            >{category.name}</MenuItem>)}
-                        </TextField>
 
                     </DialogContent>
                     <DialogActions sx={{justifyContent: 'space-evenly', marginBottom: isMobile ? '5vw' : '1vw'}}>
