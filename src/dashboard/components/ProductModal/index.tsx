@@ -1,8 +1,7 @@
-import { DialogTitle } from '@mui/material';
+import { DialogTitle, useMediaQuery } from '@mui/material';
 import { DialogContent } from '@mui/material';
 import { TextField } from '@mui/material';
-import { Alert } from '@mui/material';
-import { Snackbar } from '@mui/material';
+import { MenuItem } from '@mui/material';
 import { Button } from '@mui/material';
 import { CircularProgress } from '@mui/material';
 import { DialogActions } from '@mui/material';
@@ -13,9 +12,11 @@ import { useState } from 'react';
 import MaskedInput from 'react-text-mask';
 import { api } from '../../../api';
 import { Product } from '../../../common/contexts/productsContext';
+import { useCategories } from '../../../common/hooks/useCategories';
 import { useCurrencyMask } from '../../../common/hooks/useCurrencyMask';
 import { useProducts } from '../../../common/hooks/useProducts';
 import { useColors } from '../../../hooks/useColors';
+import { useSnackbar } from '../../hooks/useSnackbar';
 
 interface ProductModalProps {
     product: Product
@@ -27,19 +28,24 @@ interface formValues {
     name: string
     description: string
     price: string
+    category: number
 }
 
 export const ProductModal:React.FC<ProductModalProps> = ({ product, open, setOpen }) => {
     const [loading, setLoading] = useState(false)
-    const [success, setSuccess] = useState(false)
+
     const currencyMask = useCurrencyMask()
     const colors = useColors()
     const { refreshProducts } = useProducts()
+    const categories = useCategories()
+    const snackbar = useSnackbar()
+    const isMobile = useMediaQuery('(orientation: portrait)')
 
     const initialValues:formValues = {
         name: product?.name || '',
         description: product?.description || '',
-        price: product?.price?.toString() || ''
+        price: product?.price?.toString() || '',
+        category: product?.category || 0,
     }
 
     const handleSubmit = (values:formValues) => {
@@ -47,8 +53,11 @@ export const ProductModal:React.FC<ProductModalProps> = ({ product, open, setOpe
         .then(response => {
             console.log(response.data)
             setOpen(false)
-            setSuccess(true)
             refreshProducts()
+            snackbar({
+                text: `${product.name} atualizado!`,
+                severity: 'success'
+            })
         })
         .catch(error => console.error(error))
     }
@@ -64,9 +73,18 @@ export const ProductModal:React.FC<ProductModalProps> = ({ product, open, setOpe
                 <Formik initialValues={initialValues} onSubmit={handleSubmit}>
                     {({values, handleChange}) => 
                     <Form style={{display: 'contents'}} >
-                    <DialogContent sx={{flexDirection: 'column'}}>
+                    <DialogContent sx={{flexDirection: 'column', gap: '2vw'}}>
+
+                        <TextField select id='category' name='category' label='Categoria' onChange={handleChange} value={values.category} variant='standard' >
+                            {categories.map(category => <MenuItem key={category.id}
+                                value={category.id}
+                                style={{width: '100%'}}
+                            >{category.name}</MenuItem>)}
+                        </TextField>
+
                         <TextField label='Nome' id='name' value={values.name} onChange={handleChange} variant='standard' />
                         <TextField label='Descrição' id='description' value={values.description} onChange={handleChange} variant='standard' />
+                        
                         <MaskedInput
                             mask={currencyMask}
                             id='price'
@@ -82,20 +100,17 @@ export const ProductModal:React.FC<ProductModalProps> = ({ product, open, setOpe
                             />
                             )}
                         />
+
                     </DialogContent>
-                    <DialogActions>
-                        <Button type='submit' variant='contained' sx={{width: '100%'}} >{loading ? 
+                    <DialogActions sx={{justifyContent: 'space-evenly', marginBottom: isMobile ? '5vw' : '1vw'}}>
+                        <Button variant='outlined' onClick={() => setOpen(false)} >Cancelar</Button>
+                        <Button type='submit' variant='contained' >{loading ? 
                         <CircularProgress size={24} />
-                            : 'OK'}</Button>
+                            : 'Atualizar'}</Button>
                     </DialogActions>
                 </Form>}
                 </Formik>
             </Dialog>
-            <Snackbar open={success} autoHideDuration={3000} onClose={() => setSuccess(false)} anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}>
-                <Alert onClose={() => setSuccess(false)} severity={'success'} sx={{ width: '100%' }}>
-                    {product.name} atualizado!
-                </Alert>
-            </Snackbar>
         </>
     )
 }

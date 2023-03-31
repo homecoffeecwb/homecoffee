@@ -1,10 +1,16 @@
 $primary-color: #316664;
+$primary2-color:  #664A3B;
+
 $secondary-color: #B35F32;
+// $secondary-color: #87C3FF;
+// $secondary-color: #663B5D;
+
 $background-color: lighten(#FFDBC7, 5);
 $red: #E12454;
 
 :export {
     primary: $primary-color;
+    primary2: $primary2-color;
     secondary: $secondary-color;
     background: $background-color;
     red: $red;

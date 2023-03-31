@@ -2,7 +2,7 @@
 
 .ControlPanel-Page {
     width: 100%;
-    height: 100vh;
+    min-height: 100vh;
     padding: 10vw 5vw;
     background-color: $background-color;
     flex-direction: column;
@@ -17,5 +17,18 @@
         .title {
         }
 
+    }
+}
+
+@media (orientation: landscape) {
+    .ControlPanel-Page {
+        padding: 2vw 10vw;
+        gap: 2vw;
+
+        .header {
+            .title {
+                font-size: 2vw;
+            }
+        }
     }
 }
