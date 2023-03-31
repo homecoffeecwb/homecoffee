@@ -33,9 +33,10 @@ export const ProductContainer:React.FC<ProductsContainerProps> = ({ product }) =
     const deleteProduct = () => {
         api.post('/products/delete', product)
         .then(response => {
-            snackbar.setText(`produto ${product.name} deletado!`)
-            snackbar.setSeverity('warning')
-            snackbar.setOpen(true)
+            snackbar({
+                text: `produto ${product.name} deletado!`,
+                severity: 'warning'
+            })
         })
         .catch(error => console.error(error))
         .finally(() => refreshProducts())

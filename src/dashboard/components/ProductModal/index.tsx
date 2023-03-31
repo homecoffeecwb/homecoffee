@@ -1,9 +1,7 @@
 import { DialogTitle } from '@mui/material';
 import { DialogContent } from '@mui/material';
 import { TextField } from '@mui/material';
-import { Alert } from '@mui/material';
 import { MenuItem } from '@mui/material';
-import { Snackbar } from '@mui/material';
 import { Button } from '@mui/material';
 import { CircularProgress } from '@mui/material';
 import { DialogActions } from '@mui/material';
@@ -18,6 +16,7 @@ import { useCategories } from '../../../common/hooks/useCategories';
 import { useCurrencyMask } from '../../../common/hooks/useCurrencyMask';
 import { useProducts } from '../../../common/hooks/useProducts';
 import { useColors } from '../../../hooks/useColors';
+import { useSnackbar } from '../../hooks/useSnackbar';
 
 interface ProductModalProps {
     product: Product
@@ -34,11 +33,12 @@ interface formValues {
 
 export const ProductModal:React.FC<ProductModalProps> = ({ product, open, setOpen }) => {
     const [loading, setLoading] = useState(false)
-    const [success, setSuccess] = useState(false)
+
     const currencyMask = useCurrencyMask()
     const colors = useColors()
     const { refreshProducts } = useProducts()
     const categories = useCategories()
+    const snackbar = useSnackbar()
 
     const initialValues:formValues = {
         name: product?.name || '',
@@ -52,7 +52,6 @@ export const ProductModal:React.FC<ProductModalProps> = ({ product, open, setOpe
         .then(response => {
             console.log(response.data)
             setOpen(false)
-            setSuccess(true)
             refreshProducts()
         })
         .catch(error => console.error(error))
@@ -104,11 +103,6 @@ export const ProductModal:React.FC<ProductModalProps> = ({ product, open, setOpe
                 </Form>}
                 </Formik>
             </Dialog>
-            <Snackbar open={success} autoHideDuration={3000} onClose={() => setSuccess(false)} anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}>
-                <Alert onClose={() => setSuccess(false)} severity={'success'} sx={{ width: '100%' }}>
-                    {product.name} atualizado!
-                </Alert>
-            </Snackbar>
         </>
     )
 }

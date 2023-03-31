@@ -2,9 +2,11 @@ import { Snackbar } from '@mui/material';
 import { Alert } from '@mui/material';
 import { Button } from '@mui/material';
 import React from 'react';
+import { useContext } from 'react';
 import { useEffect } from 'react'
 import { Route, useNavigate } from 'react-router-dom';
 import ReactSlideRoutes from 'react-slide-routes';
+import SnackbarContext from '../../contexts/snackbarContext';
 import { useSnackbar } from '../../hooks/useSnackbar';
 import { useUser } from '../../hooks/useUser';
 import { NewProduct } from './NewProduct';
@@ -14,7 +16,7 @@ import './style.scss';
 export const ControlPanel = () => {
     const {user, setUser} = useUser()
     const navigate = useNavigate()
-    const snackbar = useSnackbar()
+    const snackbar = useContext(SnackbarContext)
 
     useEffect(() => {
         
