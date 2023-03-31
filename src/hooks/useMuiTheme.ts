@@ -26,9 +26,9 @@ export const useMuiTheme = () => {
                 // secondary: COLORS.primary,
                 // disabled: COLORS.primary,
             },
-            error: {
-                main: COLORS.red,
-            }
+            // error: {
+            //     main: COLORS.red,
+            // }
         }
     })
     
