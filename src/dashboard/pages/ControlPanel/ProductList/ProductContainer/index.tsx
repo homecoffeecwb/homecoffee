@@ -13,15 +13,18 @@ import { useState } from 'react';
 import { useColors } from '../../../../../hooks/useColors';
 import { api } from '../../../../../api';
 import { useProducts } from '../../../../../common/hooks/useProducts';
+import { useSnackbar } from '../../../../hooks/useSnackbar';
 
 interface ProductsContainerProps {
     product: Product
 }
 
 export const ProductContainer:React.FC<ProductsContainerProps> = ({ product }) => {
-    const [editModal, setEditModal] = useState(false)
     const colors = useColors()
     const { refreshProducts } = useProducts()
+    const snackbar = useSnackbar()
+    
+    const [editModal, setEditModal] = useState(false)
 
     const editProduct = () => {
         setEditModal(true)
@@ -29,7 +32,11 @@ export const ProductContainer:React.FC<ProductsContainerProps> = ({ product }) =
 
     const deleteProduct = () => {
         api.post('/products/delete', product)
-        .then(response => console.log(response.data))
+        .then(response => {
+            snackbar.setText(`produto ${product.name} deletado!`)
+            snackbar.setSeverity('warning')
+            snackbar.setOpen(true)
+        })
         .catch(error => console.error(error))
         .finally(() => refreshProducts())
     }

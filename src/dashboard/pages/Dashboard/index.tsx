@@ -5,19 +5,24 @@ import { Route, useLocation } from 'react-router-dom';
 import { Login } from '../Login';
 import { ControlPanel } from '../ControlPanel';
 import { UserProvider } from '../../contexts/userContext';
+import { Snackbar } from '@mui/material';
+import { Alert } from '@mui/material';
+import { SnackbarProvider } from '../../contexts/snackbarContext';
 
 export const Dashboard = () => {
 
     return (
         <>
         <UserProvider>
+            <SnackbarProvider>
 
-            <SlideRoutes duration={1000}>
-                <Route index element={<ControlPanel />} />
-                <Route path='/login' element={<Login />} />
-                <Route path='/panel/*' element={<ControlPanel />} />
-            </SlideRoutes>
-            
+                <SlideRoutes duration={1000}>
+                    <Route index element={<ControlPanel />} />
+                    <Route path='/login' element={<Login />} />
+                    <Route path='/panel/*' element={<ControlPanel />} />
+                </SlideRoutes>
+
+            </SnackbarProvider>
         </UserProvider>
         </>
     )
