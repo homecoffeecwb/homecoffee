@@ -11,6 +11,8 @@ import { IconButton } from '@mui/material';
 import { ProductModal } from '../../../../components/ProductModal';
 import { useState } from 'react';
 import { useColors } from '../../../../../hooks/useColors';
+import { api } from '../../../../../api';
+import { useProducts } from '../../../../../common/hooks/useProducts';
 
 interface ProductsContainerProps {
     product: Product
@@ -19,9 +21,17 @@ interface ProductsContainerProps {
 export const ProductContainer:React.FC<ProductsContainerProps> = ({ product }) => {
     const [editModal, setEditModal] = useState(false)
     const colors = useColors()
+    const { refreshProducts } = useProducts()
 
     const editProduct = () => {
         setEditModal(true)
+    }
+
+    const deleteProduct = () => {
+        api.post('/products/delete', product)
+        .then(response => console.log(response.data))
+        .catch(error => console.error(error))
+        .finally(() => refreshProducts())
     }
     
     return (
@@ -36,7 +46,7 @@ export const ProductContainer:React.FC<ProductsContainerProps> = ({ product }) =
                     <IconButton color='primary' onClick={() => editProduct()} >
                         <EditIcon />
                     </IconButton>
-                    <IconButton color='primary' >
+                    <IconButton color='primary' onClick={() => deleteProduct()} >
                         <DeleteIcon color='error' /> 
                     </IconButton>
                 </div>
