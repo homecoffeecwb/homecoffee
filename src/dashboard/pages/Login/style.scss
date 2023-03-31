@@ -22,3 +22,20 @@
         }
     }
 }
+
+@media (orientation: landscape) {
+    .Login-Page {
+        justify-content: center;
+
+        form {
+            width: 50%;
+            gap: 2vw;
+
+            .logo {
+                align-self: center;
+                width: 30vw;
+                margin-top: -3vw;
+            }
+        }
+    }
+}
