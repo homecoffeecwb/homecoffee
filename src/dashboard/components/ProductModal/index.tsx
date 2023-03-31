@@ -95,10 +95,11 @@ export const ProductModal:React.FC<ProductModalProps> = ({ product, open, setOpe
                         </TextField>
 
                     </DialogContent>
-                    <DialogActions>
-                        <Button type='submit' variant='contained' sx={{width: '100%'}} >{loading ? 
+                    <DialogActions sx={{justifyContent: 'space-evenly', marginBottom: '5vw'}}>
+                        <Button variant='outlined' onClick={() => setOpen(false)} >Cancelar</Button>
+                        <Button type='submit' variant='contained' >{loading ? 
                         <CircularProgress size={24} />
-                            : 'OK'}</Button>
+                            : 'Atualizar'}</Button>
                     </DialogActions>
                 </Form>}
                 </Formik>
