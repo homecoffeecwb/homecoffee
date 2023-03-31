@@ -19,7 +19,7 @@ export const ControlPanel = () => {
     const snackbar = useContext(SnackbarContext)
 
     useEffect(() => {
-        
+        document.title = 'Home Coffee - Dashboard'
     }, [])
     
     return (
