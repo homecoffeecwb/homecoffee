@@ -12,3 +12,13 @@
         gap: 3vw;
     }
 }
+
+@media (orientation: landscape) {
+    .ProductList-Component {
+        gap: 2vw;
+
+        .list-container {
+            gap: 1vw;
+        }
+    }
+}

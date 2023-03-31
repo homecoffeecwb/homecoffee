@@ -1,4 +1,4 @@
-import { DialogTitle } from '@mui/material';
+import { DialogTitle, useMediaQuery } from '@mui/material';
 import { DialogActions } from '@mui/material';
 import { Button } from '@mui/material';
 import { Dialog } from '@mui/material';
@@ -13,6 +13,7 @@ interface DeleteConfirmProps {
 
 export const DeleteConfirm:React.FC<DeleteConfirmProps> = ({ open, setOpen, confirm }) => {
     const colors = useColors()
+    const isMobile = useMediaQuery('(orientation: portrait)')
 
     const confirmDeletion = () => {
         confirm(true)
@@ -26,7 +27,7 @@ export const DeleteConfirm:React.FC<DeleteConfirmProps> = ({ open, setOpen, conf
             
         >
             <DialogTitle>Deletar produto?</DialogTitle>
-            <DialogActions sx={{justifyContent: 'space-evenly', marginBottom: '5vw'}}>
+            <DialogActions sx={{justifyContent: 'space-evenly', marginBottom: isMobile ? '5vw' : '1vw'}}>
                 <Button variant='outlined' onClick={() => setOpen(false)} >Cancelar</Button>
                 <Button variant='contained' color='error' onClick={() => confirmDeletion()} >Deletar</Button>
             </DialogActions>

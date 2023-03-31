@@ -29,3 +29,11 @@
 
     }
 }
+
+@media (orientation: landscape) {
+    .ProductContainer-Component {
+        .main-container {
+            padding: 1vw;
+        }
+    }
+}

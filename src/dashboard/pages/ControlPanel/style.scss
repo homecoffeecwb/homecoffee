@@ -19,3 +19,16 @@
 
     }
 }
+
+@media (orientation: landscape) {
+    .ControlPanel-Page {
+        padding: 2vw 10vw;
+        gap: 2vw;
+
+        .header {
+            .title {
+                font-size: 2vw;
+            }
+        }
+    }
+}

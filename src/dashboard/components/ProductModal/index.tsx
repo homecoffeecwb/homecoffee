@@ -1,4 +1,4 @@
-import { DialogTitle } from '@mui/material';
+import { DialogTitle, useMediaQuery } from '@mui/material';
 import { DialogContent } from '@mui/material';
 import { TextField } from '@mui/material';
 import { MenuItem } from '@mui/material';
@@ -39,6 +39,7 @@ export const ProductModal:React.FC<ProductModalProps> = ({ product, open, setOpe
     const { refreshProducts } = useProducts()
     const categories = useCategories()
     const snackbar = useSnackbar()
+    const isMobile = useMediaQuery('(orientation: portrait)')
 
     const initialValues:formValues = {
         name: product?.name || '',
@@ -98,7 +99,7 @@ export const ProductModal:React.FC<ProductModalProps> = ({ product, open, setOpe
                         </TextField>
 
                     </DialogContent>
-                    <DialogActions sx={{justifyContent: 'space-evenly', marginBottom: '5vw'}}>
+                    <DialogActions sx={{justifyContent: 'space-evenly', marginBottom: isMobile ? '5vw' : '1vw'}}>
                         <Button variant='outlined' onClick={() => setOpen(false)} >Cancelar</Button>
                         <Button type='submit' variant='contained' >{loading ? 
                         <CircularProgress size={24} />
