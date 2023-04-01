@@ -24,21 +24,17 @@ export const ProductList = () => {
         header.resetTitle()
 
     }, [])
-
-    const changeTab = (value:any) => {
-        setCategory(value)
-    }
     
     return (
         <div className='ProductList-Component' >
             <Tabs
                 value={category}
-                onChange={(event, value) => changeTab(value)}
+                // onChange={}
                 textColor="primary"
                 indicatorColor="primary"
                 variant='fullWidth'
                 >
-                    {categories.map(item => <Tab value={item.id} label={item.name} key={item.id} sx={{fontWeight: 'bold'}} />)}
+                    {categories.map(item => <Tab value={item.id} label={item.name} key={item.id} onClick={() => setCategory(item.id)} sx={{fontWeight: 'bold'}} />)}
             </Tabs>
             <div className="list-container">
                 {products.filter(product => product.category == category).map(product => <ProductContainer key={product.id} product={product} />)}
