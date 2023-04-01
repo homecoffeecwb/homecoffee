@@ -27,7 +27,6 @@ export const ProductList = () => {
     
     return (
         <div className='ProductList-Component' >
-            <Button variant='contained' onClick={() => navigate('/dashboard/panel/novo')} >novo produto</Button>
             <Tabs
                 value={category}
                 onChange={(event, value) => changeTab(value)}
@@ -40,6 +39,7 @@ export const ProductList = () => {
             <div className="list-container">
                 {products.filter(product => product.category == category).map(product => <ProductContainer key={product.id} product={product} />)}
             </div>
+            <Button variant='contained' onClick={() => navigate('/dashboard/panel/novo')} >novo produto</Button>
         </div>
     )
 }

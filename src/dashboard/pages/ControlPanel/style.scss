@@ -7,7 +7,7 @@
     background-color: $background-color;
     flex-direction: column;
     gap: 10vw;
-    overflow-y: scroll;
+    overflow-y: hidden;
 
     .header {
         justify-content: space-between;
