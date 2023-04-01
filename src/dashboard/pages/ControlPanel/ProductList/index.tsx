@@ -38,7 +38,7 @@ export const ProductList = () => {
                 indicatorColor="primary"
                 variant='fullWidth'
                 >
-                    {categories.map(item => <Tab value={item.id} label={item.name} key={item.id} />)}
+                    {categories.map(item => <Tab value={item.id} label={item.name} key={item.id} sx={{fontWeight: 'bold'}} />)}
             </Tabs>
             <div className="list-container">
                 {products.filter(product => product.category == category).map(product => <ProductContainer key={product.id} product={product} />)}
