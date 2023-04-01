@@ -8,6 +8,7 @@ import { UserProvider } from '../../contexts/userContext';
 import { Snackbar } from '@mui/material';
 import { Alert } from '@mui/material';
 import { SnackbarProvider } from '../../contexts/snackbarContext';
+import { HeaderProvider } from '../../contexts/headerContext';
 
 export const Dashboard = () => {
 
@@ -15,13 +16,15 @@ export const Dashboard = () => {
         <>
         <UserProvider>
             <SnackbarProvider>
+                <HeaderProvider>
 
-                <SlideRoutes duration={1000}>
-                    <Route index element={<ControlPanel />} />
-                    <Route path='/login' element={<Login />} />
-                    <Route path='/panel/*' element={<ControlPanel />} />
-                </SlideRoutes>
+                    <SlideRoutes duration={1000}>
+                        <Route index element={<ControlPanel />} />
+                        <Route path='/login' element={<Login />} />
+                        <Route path='/panel/*' element={<ControlPanel />} />
+                    </SlideRoutes>
 
+                </HeaderProvider>
             </SnackbarProvider>
         </UserProvider>
         </>

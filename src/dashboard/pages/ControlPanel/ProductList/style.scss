@@ -3,22 +3,28 @@
 .ProductList-Component {
     width: 100%;
     flex-direction: column;
-    gap: 5vw;
-    margin-bottom: 5vw;
+    height: 100%;
+    // gap: 5vw;
 
     .list-container {
         width: 100%;
         flex-direction: column;
         gap: 3vw;
+        height: 70vh;
+        overflow-y: auto;
+
+        margin-bottom: 2vw;
     }
 }
 
 @media (orientation: landscape) {
     .ProductList-Component {
-        gap: 2vw;
+        // gap: 2vw;
 
         .list-container {
             gap: 1vw;
+
+            margin-bottom: 2vw;
         }
     }
 }

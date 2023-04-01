@@ -9,6 +9,7 @@ import { useCategories } from '../../../../common/hooks/useCategories';
 import { useProducts } from '../../../../common/hooks/useProducts';
 import { ProductContainer } from './ProductContainer';
 import './style.scss';
+import { useHeader } from '../../../hooks/useHeader';
 
 export const ProductList = () => {
     const {products, refreshProducts} = useProducts()
@@ -16,30 +17,29 @@ export const ProductList = () => {
     
     const categories = useCategories()
     const navigate = useNavigate()
+    const header = useHeader()
 
     useEffect(() => {
         refreshProducts()
-    }, [])
+        header.resetTitle()
 
-    const changeTab = (value:any) => {
-        setCategory(value)
-    }
+    }, [])
     
     return (
         <div className='ProductList-Component' >
-            <Button variant='contained' onClick={() => navigate('/dashboard/panel/novo')} >novo produto</Button>
             <Tabs
                 value={category}
-                onChange={(event, value) => changeTab(value)}
+                // onChange={}
                 textColor="primary"
                 indicatorColor="primary"
                 variant='fullWidth'
                 >
-                    {categories.map(item => <Tab value={item.id} label={item.name} key={item.id} />)}
+                    {categories.map(item => <Tab value={item.id} label={item.name} key={item.id} onClick={() => setCategory(item.id)} sx={{fontWeight: 'bold'}} />)}
             </Tabs>
             <div className="list-container">
                 {products.filter(product => product.category == category).map(product => <ProductContainer key={product.id} product={product} />)}
             </div>
+            <Button variant='contained' onClick={() => navigate('/dashboard/panel/novo')} >novo produto</Button>
         </div>
     )
 }
