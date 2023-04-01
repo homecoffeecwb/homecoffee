@@ -3,10 +3,9 @@
 .ControlPanel-Page {
     width: 100%;
     min-height: 100vh;
-    padding: 10vw 5vw;
+    padding: 5vw;
     background-color: $background-color;
     flex-direction: column;
-    gap: 10vw;
     overflow-y: hidden;
 
     .header {

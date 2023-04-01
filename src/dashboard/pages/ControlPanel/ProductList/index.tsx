@@ -9,6 +9,7 @@ import { useCategories } from '../../../../common/hooks/useCategories';
 import { useProducts } from '../../../../common/hooks/useProducts';
 import { ProductContainer } from './ProductContainer';
 import './style.scss';
+import { useHeader } from '../../../hooks/useHeader';
 
 export const ProductList = () => {
     const {products, refreshProducts} = useProducts()
@@ -16,9 +17,12 @@ export const ProductList = () => {
     
     const categories = useCategories()
     const navigate = useNavigate()
+    const header = useHeader()
 
     useEffect(() => {
         refreshProducts()
+        header.resetTitle()
+
     }, [])
 
     const changeTab = (value:any) => {

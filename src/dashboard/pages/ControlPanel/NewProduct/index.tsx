@@ -3,6 +3,7 @@ import { MenuItem } from '@mui/material';
 import { TextField } from '@mui/material';
 import { Form, Formik } from 'formik';
 import React from 'react';
+import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 import MaskedInput from 'react-text-mask';
 import { api } from '../../../../api';
@@ -10,6 +11,7 @@ import { useCategories } from '../../../../common/hooks/useCategories';
 import { useCurrencyMask } from '../../../../common/hooks/useCurrencyMask';
 import { useSnackbar } from '../../../hooks/useSnackbar';
 import './style.scss';
+import { useHeader } from '../../../hooks/useHeader';
 
 interface formValues {
     name: string
@@ -23,6 +25,7 @@ export const NewProduct = () => {
     const navigate = useNavigate()
     const categories = useCategories()
     const snackbar = useSnackbar()
+    const header = useHeader()
 
     const initialValues:formValues = {
         name: '',
@@ -42,13 +45,16 @@ export const NewProduct = () => {
         })
         .catch(error => console.error(error))
     }
+
+    useEffect(() => {
+        header.setTitle('Novo produto')
+    }, [])
     
     return (
         <div className='NewProduct-Component' >
             <Formik initialValues={initialValues} onSubmit={handleSubmit} >
                 {({values, handleChange}) => 
                 <Form>
-                    <h3 style={{textAlign: 'center'}}>Cadastrar novo produto</h3>
                     <TextField select id='category' name='category' label='Categoria' onChange={handleChange} value={values.category} >
                         {categories.map(category => <MenuItem key={category.id}
                             value={category.id}
