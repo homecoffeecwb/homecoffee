@@ -1,0 +1,28 @@
+@import '../../../sass/all';
+
+.MenuHeader {
+	background-color: #fff;
+	height: 6rem;
+	width: 100vw;
+	padding: 0 1rem;
+	@include flexbox;
+	@include justify-content(space-between);
+	@include align-items(center);
+
+	.lang-btn {
+		font-size: 1.4rem;
+		font-family: $primary-font;
+		color: $primary-color;
+		background-color: transparent;
+		border: none;
+	}
+
+	.logo {
+		width: 5rem;
+		height: auto;
+	}
+
+	.share-btn {
+		fill: $primary-color;
+	}
+}
