@@ -9,8 +9,7 @@ interface MainProps {}
 const Main: React.FunctionComponent<MainProps> = () => {
   return (
     <div>
-				<Header />
-				Alo!
+			<Header />
 		</div>
   );
 };
