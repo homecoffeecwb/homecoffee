@@ -21,7 +21,7 @@ const Header: React.FunctionComponent<HeaderProps> = () => {
         {language.current}
       </IconButton>
       <img src={LogoFlagBranca} className="logo" alt="Home's Coffe" />
-      <IconButton color="primary" aria-label={language.texts.share}>
+      <IconButton color="primary" aria-label={language.aria.share}>
         <ShareIcon />
       </IconButton>
     </div>
