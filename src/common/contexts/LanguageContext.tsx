@@ -9,6 +9,8 @@ interface LanguageObject {
 }
 
 interface LanguageContextValues {
+	getText: (key: string) => string;
+	getAria: (key: string) => string;
   language: LanguageObject;
   togglePT_EN: () => void;
 }
@@ -33,9 +35,27 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({
     else setLanguage(PT);
   }, [language]);
 
+	const getText = React.useCallback((key: string) => {
+		if (!language[key]) {
+			return "";
+		}
+
+		return String(language[key]);
+	}, [language])
+
+	const getAria = React.useCallback((key: string) => {
+		if (!language.aria[key]) {
+			return "";
+		}
+
+		return String(language.aria[key]);
+	}, [language])
+
   return (
     <LanguageContext.Provider
       value={{
+				getText,
+				getAria,
         language,
         togglePT_EN,
       }}
