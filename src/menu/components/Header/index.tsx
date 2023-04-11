@@ -1,11 +1,11 @@
 import React from "react";
-import ShareIcon from "@mui/icons-material/Share";
 import IconButton from "@mui/material/IconButton";
 
 import useLanguage from "../../../common/hooks/useLanguage";
 
 import LogoFlagBranca from "../../../assets/logos/Home's Coffee_COLOR-FLAG.svg";
 import "./styles.scss";
+import ShareButton from "../ShareButton";
 
 interface HeaderProps {}
 
@@ -21,9 +21,7 @@ const Header: React.FunctionComponent<HeaderProps> = () => {
         {language.current}
       </IconButton>
       <img src={LogoFlagBranca} className="logo" alt="Home's Coffe" />
-      <IconButton color="primary" aria-label={language.aria.share}>
-        <ShareIcon />
-      </IconButton>
+      <ShareButton />
     </div>
   );
 };
