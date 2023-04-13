@@ -1,3 +1,4 @@
+import {Box} from "@mui/material";
 import React from "react";
 import Header from "../../components/Header";
 
@@ -8,9 +9,9 @@ interface MainProps {}
  */
 const Main: React.FunctionComponent<MainProps> = () => {
   return (
-    <div>
+    <Box display={"flex"} flexDirection="column" justifyContent={"flex-top"} >
 			<Header />
-		</div>
+		</Box>
   );
 };
 
