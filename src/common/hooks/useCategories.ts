@@ -1,16 +1,32 @@
+export type Category = {
+	id: number;
+	name: {
+		[Key: string]: string;
+	}
+}
+
 export const useCategories = () => {
-    const categories = [
+    const categories: Category[] = [
         {
             id: 0,
-            name: 'Quentes',
+            name: {
+							PT: 'Bebidas',
+							EN: 'Drinks',
+						},
         },
         {
             id: 1,
-            name: 'Geladas',
+            name: {
+							PT: 'Comidas',
+							EN: 'Food',
+						},
         },
         {
             id: 2,
-            name: 'Lanches',
+            name: {
+							PT: 'Doces',
+							EN: 'Sweet',
+						},
         },
     ]
 
