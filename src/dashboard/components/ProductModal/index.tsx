@@ -10,13 +10,13 @@ import { Form, Formik } from 'formik';
 import React from 'react';
 import { useState } from 'react';
 import MaskedInput from 'react-text-mask';
-import { api } from '../../../api';
 import { Product } from '../../../common/contexts/productsContext';
 import { useCategories } from '../../../common/hooks/useCategories';
 import { useCurrencyMask } from '../../../common/hooks/useCurrencyMask';
 import { useProducts } from '../../../common/hooks/useProducts';
 import { useColors } from '../../../hooks/useColors';
 import { useSnackbar } from '../../hooks/useSnackbar';
+import { useApi } from '../../../common/hooks/useApi';
 
 interface ProductModalProps {
     product: Product
@@ -40,6 +40,7 @@ export const ProductModal:React.FC<ProductModalProps> = ({ product, open, setOpe
     const categories = useCategories()
     const snackbar = useSnackbar()
     const isMobile = useMediaQuery('(orientation: portrait)')
+    const api = useApi()
 
     const initialValues:formValues = {
         name: product?.name || '',
@@ -49,8 +50,7 @@ export const ProductModal:React.FC<ProductModalProps> = ({ product, open, setOpe
     }
 
     const handleSubmit = (values:formValues) => {
-        api.post('/products/update', {...values, id: product.id})
-        .then(response => {
+        api.products.update({...values, id: product.id}, (response: { data: Product[] }) => {
             console.log(response.data)
             setOpen(false)
             refreshProducts()
@@ -58,8 +58,7 @@ export const ProductModal:React.FC<ProductModalProps> = ({ product, open, setOpe
                 text: `${product.name} atualizado!`,
                 severity: 'success'
             })
-        })
-        .catch(error => console.error(error))
+        }, (error: any) => console.error(error))
     }
     
     return (

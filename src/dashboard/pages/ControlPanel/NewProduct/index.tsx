@@ -6,12 +6,12 @@ import React from 'react';
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 import MaskedInput from 'react-text-mask';
-import { api } from '../../../../api';
 import { useCategories } from '../../../../common/hooks/useCategories';
 import { useCurrencyMask } from '../../../../common/hooks/useCurrencyMask';
 import { useSnackbar } from '../../../hooks/useSnackbar';
 import './style.scss';
 import { useHeader } from '../../../hooks/useHeader';
+import { useApi } from '../../../../common/hooks/useApi';
 
 interface formValues {
     name: string
@@ -26,6 +26,7 @@ export const NewProduct = () => {
     const categories = useCategories()
     const snackbar = useSnackbar()
     const header = useHeader()
+    const api = useApi()
 
     const initialValues:formValues = {
         name: '',
@@ -35,15 +36,13 @@ export const NewProduct = () => {
     }
 
     const handleSubmit = (values:formValues) => {
-        api.post('/products/new', values)
-        .then(response => {
+        api.products.new(values, () => {
             navigate('/dashboard/panel')
             snackbar({
                 text: `${values.name} cadastrado!`,
                 severity: 'success'
             })
         })
-        .catch(error => console.error(error))
     }
 
     useEffect(() => {
