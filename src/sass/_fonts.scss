@@ -1,0 +1,26 @@
+@font-face {
+  font-family: 'Bodoni';
+  font-weight: normal;
+  font-style: normal;
+  src: url("../assets/fonts/Bodoni/BodoniFLF.a5c77dca0bba1293ef0ff6154925a6.97a0034f1e21c26d011f5862d182e7b4.woff2") format('woff2');
+}
+@font-face {
+  font-family: 'Bodoni';
+  font-weight: bold;
+  font-style: normal;
+  src: url("../assets/fonts/Bodoni/BodoniFLFBold.371e8c3f9cfd1fa95dde1de19e.fa42f8930850e78f03eac892287a74f2.woff2") format('woff2');
+}
+@font-face {
+  font-family: 'Bodoni';
+  font-weight: normal;
+  font-style: italic;
+  src: url("../assets/fonts/Bodoni/BodoniFLFItalic.5ba444943c48a93ee216c47a.ec597eee98ac27e6969e3fee927756bd.woff2") format('woff2');
+}
+@font-face {
+  font-family: 'Bodoni';
+  font-weight: bold;
+  font-style: italic;
+  src: url("../assets/fonts/Bodoni/BodoniFLFBoldItalic.6d42132a5e16b9de5d17.778d3a84d2d308490167e7534148f1c5.woff2") format('woff2');
+}
+
+$primary-font: 'Bodoni';
