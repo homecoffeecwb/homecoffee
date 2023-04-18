@@ -59,7 +59,7 @@ export const NewProduct = () => {
                         {categories.map(category => <MenuItem key={category.id}
                             value={category.id}
                             style={{width: '100%'}}
-                        >{category.name}</MenuItem>)}
+                        >{category.name['PT']}</MenuItem>)}
                     </TextField>
 
                     <TextField label='Nome' id='name' value={values.name} onChange={handleChange} />
