@@ -1,0 +1,13 @@
+{
+	"current": "EN",
+	"aria": {
+		"share":"Share",
+		"shareModalTitle": "Share site",
+		"shareModalDescription": "Dialog box showing a QR Code pointing to the currente page, and the same URL in text format with a 'copy to clipboard' button"
+	},
+	"close": "Close",
+	"shareThisPage": "Share this page",
+	"copyToClipboard": "Copy to clipboard",
+	"copiedToClipboard": "Copied successfully!"
+}
+

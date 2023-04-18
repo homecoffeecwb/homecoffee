@@ -1,0 +1,12 @@
+{
+	"current": "PT",
+	"aria": {
+		"share":"Compartilhar",
+		"shareModalTitle": "Compartilhar site",
+		"shareModalDescription": "Caixa de diálogo mostrando um QR Code para a página atual, e a URL da página em formato de texto com um botão 'copiar par a área de transferência'"
+	},
+	"close": "Fechar",
+	"shareThisPage": "Compartilhe essa página",
+	"copyToClipboard": "Copiar para a área de transferência",
+	"copiedToClipboard": "Copiado com sucesso!"
+}
