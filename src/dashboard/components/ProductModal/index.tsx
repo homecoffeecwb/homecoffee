@@ -79,7 +79,7 @@ export const ProductModal:React.FC<ProductModalProps> = ({ product, open, setOpe
                             {categories.map(category => <MenuItem key={category.id}
                                 value={category.id}
                                 style={{width: '100%'}}
-                            >{category.name}</MenuItem>)}
+                            >{category.name['PT']}</MenuItem>)}
                         </TextField>
 
                         <TextField label='Nome' id='name' value={values.name} onChange={handleChange} variant='standard' />
