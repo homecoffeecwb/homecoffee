@@ -61,8 +61,8 @@ export const NewProduct = () => {
                         >{category.name}</MenuItem>)}
                     </TextField>
 
-                    <TextField label='Nome' id='name' value={values.name} onChange={handleChange} />
-                    <TextField label='Descrição' id='description' value={values.description} onChange={handleChange} />
+                    <TextField label='Nome' id='name' value={values.name} onChange={handleChange} required />
+                    <TextField label='Descrição' id='description' value={values.description} onChange={handleChange} required />
 
                     <MaskedInput
                         mask={currencyMask}
@@ -75,6 +75,7 @@ export const NewProduct = () => {
                             {...props}
                             label='Preço'
                             inputProps={{inputMode: 'numeric'}}
+                            required
                         />
                         )}
                     />
