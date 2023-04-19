@@ -2,9 +2,16 @@ import { createContext, useState } from 'react';
 import React, { useEffect } from 'react';
 import { useApi } from '../hooks/useApi';
 
+export interface Subcategory {
+    id: number
+    name: string
+    categoru: number
+}
+
 export interface Category {
     id: number
-    name: string 
+    name: string
+    subcategories: Subcategory[]
 }
 
 interface CategoriesContextValue {
@@ -27,6 +34,10 @@ export const CategoriesProvider:React.FC<CategoriesProviderProps> = ({children})
     useEffect(() => {
         api.categories.get((response: { data: Category[] }) => setValue(response.data))
     }, [])
+
+    useEffect(() => {
+        console.log(value)
+    }, [value])
 
     return (
          <CategoriesContext.Provider value={{value, setValue}}>
