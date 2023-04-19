@@ -5,13 +5,15 @@ import { useHeader } from '../../../hooks/useHeader';
 import SettingsIcon from '@mui/icons-material/Settings';
 import { useColors } from '../../../../hooks/useColors';
 import CoffeeIcon from '@mui/icons-material/Coffee';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 export const Header = () => {
     const {user, setUser} = useUser()
     const header = useHeader()
     const colors = useColors()
     const navigate = useNavigate()
+    const location = useLocation()
 
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
@@ -24,6 +26,9 @@ export const Header = () => {
     
     return (
         <div className="header">
+            { location.pathname != '/dashboard/panel' && <IconButton color='primary' onClick={() => navigate(-1)}>
+                <ArrowBackIcon />
+            </IconButton> }
             <h3 className='title'>{header.title}</h3>
             <div className='header-buttons'>
                 <IconButton color='primary' onClick={handleClick}>
