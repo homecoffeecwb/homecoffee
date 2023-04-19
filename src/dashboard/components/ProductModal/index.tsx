@@ -37,7 +37,7 @@ export const ProductModal:React.FC<ProductModalProps> = ({ product, open, setOpe
     const currencyMask = useCurrencyMask()
     const colors = useColors()
     const { refreshProducts } = useProducts()
-    const categories = useCategories()
+    const { categories } = useCategories()
     const snackbar = useSnackbar()
     const isMobile = useMediaQuery('(orientation: portrait)')
     const api = useApi()
@@ -46,7 +46,7 @@ export const ProductModal:React.FC<ProductModalProps> = ({ product, open, setOpe
         name: product?.name || '',
         description: product?.description || '',
         price: product?.price?.toString() || '',
-        category: product?.category || 0,
+        category: product?.category || 1,
     }
 
     const handleSubmit = (values:formValues) => {

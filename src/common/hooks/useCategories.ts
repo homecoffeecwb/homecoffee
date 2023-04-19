@@ -1,18 +1,8 @@
-export const useCategories = () => {
-    const categories = [
-        {
-            id: 0,
-            name: 'Quentes',
-        },
-        {
-            id: 1,
-            name: 'Geladas',
-        },
-        {
-            id: 2,
-            name: 'Lanches',
-        },
-    ]
+import { useContext } from 'react'
+import CategoriesContext from '../contexts/categoriesContext'
 
-    return categories
+export const useCategories = () => {
+    const categoriesContext = useContext(CategoriesContext);
+
+    return {categories: categoriesContext.value, setCategories: categoriesContext.setValue}
 }

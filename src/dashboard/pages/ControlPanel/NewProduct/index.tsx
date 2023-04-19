@@ -23,7 +23,7 @@ interface formValues {
 export const NewProduct = () => {
     const currencyMask = useCurrencyMask()
     const navigate = useNavigate()
-    const categories = useCategories()
+    const { categories } = useCategories()
     const snackbar = useSnackbar()
     const header = useHeader()
     const api = useApi()
@@ -32,7 +32,7 @@ export const NewProduct = () => {
         name: '',
         description: '',
         price: '',
-        category: 0
+        category: 1
     }
 
     const handleSubmit = (values:formValues) => {

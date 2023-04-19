@@ -5,11 +5,13 @@ import { useHeader } from '../../../hooks/useHeader';
 import SettingsIcon from '@mui/icons-material/Settings';
 import { useColors } from '../../../../hooks/useColors';
 import CoffeeIcon from '@mui/icons-material/Coffee';
+import { useNavigate } from 'react-router-dom';
 
 export const Header = () => {
     const {user, setUser} = useUser()
     const header = useHeader()
     const colors = useColors()
+    const navigate = useNavigate()
 
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
@@ -62,7 +64,7 @@ export const Header = () => {
                     transformOrigin={{ horizontal: 'right', vertical: 'top' }}
                     anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
                 >
-                    <MenuItem onClick={handleClose} sx={{gap: '3vw'}}>
+                    <MenuItem onClick={() => navigate('/dashboard/panel/categorias')} sx={{gap: '3vw'}}>
                         <CoffeeIcon /> Categorias
                     </MenuItem>
                 </Menu>
