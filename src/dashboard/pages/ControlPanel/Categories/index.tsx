@@ -7,7 +7,6 @@ import { CategoryContainer } from './CategoryContainer';
 import { SubcategoryContainer } from './SubcategoryContainer';
 import { Button } from '@mui/material';
 import { CategoryModal } from './CategoryModal';
-
 interface CategoriesProps {
     
 }

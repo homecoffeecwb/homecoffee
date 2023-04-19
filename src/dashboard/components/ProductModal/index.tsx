@@ -80,7 +80,7 @@ export const ProductModal:React.FC<ProductModalProps> = ({ product, open, setOpe
                             {categories.map(category => <MenuItem key={category.id}
                                 value={category.id}
                                 style={{width: '100%'}}
-                            >{category.name['PT']}</MenuItem>)}
+                            >{category.name}</MenuItem>)}
                         </TextField>
                         <TextField select id='subcategory' name='subcategory' label='Sub-categoria' onChange={handleChange} value={values.subcategory} >
                             {categories.filter(category => category.id == values.category)[0].subcategories.map(subcategory => <MenuItem key={subcategory.id}

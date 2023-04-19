@@ -38,7 +38,6 @@ export const CategoriesProvider:React.FC<CategoriesProviderProps> = ({children})
     useEffect(() => {
         console.log(value)
     }, [value])
-
     return (
          <CategoriesContext.Provider value={{value, setValue}}>
               {children}

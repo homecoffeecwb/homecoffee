@@ -20,6 +20,7 @@ export const useApi = () => {
             .catch(error => errorCallback(error))
             .finally(() => finallyCallback())
         },
+
         products: {
             get: (callback:Function, errorCallback:Function = (error: any) => console.error(error), finallyCallback:Function = () => null) => {
                 axios.get('/products')
@@ -45,6 +46,15 @@ export const useApi = () => {
                 .catch(error => errorCallback(error))
                 .finally(() => finallyCallback())
             },
+        },
+
+        categories: {
+            get: (callback:Function, errorCallback:Function = (error: any) => console.error(error), finallyCallback:Function = () => null) => {
+                axios.get('/categories')
+                .then(response => callback(response))
+                .catch(error => errorCallback(error))
+                .finally(() => finallyCallback())
+            }
         }
     }
 
