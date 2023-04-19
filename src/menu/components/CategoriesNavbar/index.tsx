@@ -22,7 +22,7 @@ const CategoriesNavbar: React.FunctionComponent<CategoriesNavbarProps> = () => {
 
   return (
     <div>
-      <AppBar position="static" variant="outlined" color="transparent">
+      <AppBar position="static" variant="elevation" elevation={0} color="transparent">
         <Tabs
           value={category}
           onChange={handleChange}
@@ -39,6 +39,7 @@ const CategoriesNavbar: React.FunctionComponent<CategoriesNavbarProps> = () => {
           ))}
         </Tabs>
       </AppBar>
+			{}
     </div>
   );
 };
