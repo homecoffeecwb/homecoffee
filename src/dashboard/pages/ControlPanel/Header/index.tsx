@@ -69,7 +69,7 @@ export const Header = () => {
                     transformOrigin={{ horizontal: 'right', vertical: 'top' }}
                     anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
                 >
-                    <MenuItem onClick={() => navigate('/dashboard/panel/categorias')} sx={{gap: '3vw'}}>
+                    <MenuItem onClick={handleClose} sx={{gap: '3vw'}}>
                         <CoffeeIcon /> Categorias
                     </MenuItem>
                 </Menu>
