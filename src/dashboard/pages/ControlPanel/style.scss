@@ -13,6 +13,11 @@
         align-items: center;
         color: $primary-color;
 
+        .header-buttons {
+            align-items: center;
+            gap: 3vw;
+        }
+
         .title {
         }
 
