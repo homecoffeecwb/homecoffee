@@ -38,7 +38,6 @@ export const NewProduct = () => {
     }
 
     const handleSubmit = (values:formValues) => {
-        console.log(values)
         api.products.new(values, () => {
             navigate('/dashboard/panel')
             snackbar({
