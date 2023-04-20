@@ -8,6 +8,7 @@ export interface Product {
     description: string
     price: number | string
     category: number
+    subcategory: number
 }
 
 interface ProductsContextValue {

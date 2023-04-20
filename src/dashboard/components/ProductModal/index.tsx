@@ -29,6 +29,7 @@ interface formValues {
     description: string
     price: string
     category: number
+    subcategory: number
 }
 
 export const ProductModal:React.FC<ProductModalProps> = ({ product, open, setOpen }) => {
@@ -47,6 +48,7 @@ export const ProductModal:React.FC<ProductModalProps> = ({ product, open, setOpe
         description: product?.description || '',
         price: product?.price?.toString() || '',
         category: product?.category || 1,
+        subcategory: product?.subcategory || 1,
     }
 
     const handleSubmit = (values:formValues) => {
@@ -79,6 +81,12 @@ export const ProductModal:React.FC<ProductModalProps> = ({ product, open, setOpe
                                 value={category.id}
                                 style={{width: '100%'}}
                             >{category.name}</MenuItem>)}
+                        </TextField>
+                        <TextField select id='subcategory' name='subcategory' label='Sub-categoria' onChange={handleChange} value={values.subcategory} >
+                            {categories.filter(category => category.id == values.category)[0].subcategories.map(subcategory => <MenuItem key={subcategory.id}
+                                value={subcategory.id}
+                                style={{width: '100%'}}
+                            >{subcategory.name}</MenuItem>)}
                         </TextField>
 
                         <TextField label='Nome' id='name' value={values.name} onChange={handleChange} variant='standard' />
