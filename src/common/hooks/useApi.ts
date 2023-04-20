@@ -12,6 +12,11 @@ interface newProductValues {
     price: string
     category: number
 }
+
+interface newCategoryValues {
+    name: string
+}
+
 export const useApi = () => {
     const api = {
         login: (data:loginValues, callback:Function, errorCallback:Function = (error: any) => console.error(error), finallyCallback:Function = () => null) => {
@@ -54,7 +59,13 @@ export const useApi = () => {
                 .then(response => callback(response))
                 .catch(error => errorCallback(error))
                 .finally(() => finallyCallback())
-            }
+            },
+            new: (data:newCategoryValues, callback:Function, errorCallback:Function = (error: any) => console.error(error), finallyCallback:Function = () => null) => {
+                axios.post('/categories/new', data)
+                .then(response => callback(response))
+                .catch(error => errorCallback(error))
+                .finally(() => finallyCallback())
+            },
         }
     }
 
