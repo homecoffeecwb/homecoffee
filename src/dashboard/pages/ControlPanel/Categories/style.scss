@@ -22,14 +22,16 @@
         gap: 3vw;
         width: 100%;
         padding: 3vw;
-
+        background-color: darken($background-color, 10);
+        
         svg {
             transition: 0.5s;
         }
     }   
-
+    
     .SubcategoryContainer-Component {
         width: 70%;
         padding: 2vw;
+        background-color: darken($background-color, 10);
     }
 }
