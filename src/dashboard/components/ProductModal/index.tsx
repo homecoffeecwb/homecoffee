@@ -46,7 +46,7 @@ export const ProductModal:React.FC<ProductModalProps> = ({ product, open, setOpe
     const initialValues:formValues = {
         name: product?.name || '',
         description: product?.description || '',
-        price: product?.price?.toString() || '',
+        price: product?.price?.toString().replace('.', ',') || '',
         category: product?.category || 1,
         subcategory: product?.subcategory || 1,
     }
