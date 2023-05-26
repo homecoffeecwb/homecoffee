@@ -2,6 +2,8 @@ import { AppBar, Tab, Tabs } from "@mui/material";
 import React from "react";
 import useLanguage from "../../../common/hooks/useLanguage";
 import { useCategories } from "../../../common/hooks/useCategories";
+import { useProducts } from "../../../common/hooks/useProducts";
+import ProductItem from "../ProductItem";
 
 interface CategoriesNavbarProps {
   // TODO: Component props
@@ -12,9 +14,10 @@ interface CategoriesNavbarProps {
  * stored in the Dashboard
  */
 const CategoriesNavbar: React.FunctionComponent<CategoriesNavbarProps> = () => {
-  const { language, getAria } = useLanguage();
   const categories = useCategories();
+  const { products } = useProducts();
   const [category, setCategory] = React.useState<number>(categories[0].id);
+  const { language, getAria } = useLanguage();
 
   const handleChange = React.useCallback(
     (_e: React.SyntheticEvent, newValue: number) => {
@@ -23,9 +26,18 @@ const CategoriesNavbar: React.FunctionComponent<CategoriesNavbarProps> = () => {
     []
   );
 
+  React.useEffect(() => {
+    console.log(products);
+  }, []);
+
   return (
     <div>
-      <AppBar position="static" variant="outlined" color="transparent">
+      <AppBar
+        position="static"
+        variant="elevation"
+        elevation={0}
+        color="transparent"
+      >
         <Tabs
           value={category}
           onChange={handleChange}
@@ -39,6 +51,13 @@ const CategoriesNavbar: React.FunctionComponent<CategoriesNavbarProps> = () => {
           ))}
         </Tabs>
       </AppBar>
+      <div className="list-container">
+        {products
+          .filter((product) => product.category == category)
+          .map((product) => (
+            <ProductItem key={product.id} product={product} />
+          ))}
+      </div>
     </div>
   );
 };
