@@ -20,13 +20,14 @@ interface CategoryModalProps {
     category?: Category
     open: boolean
     setOpen: (value:boolean) => void
+    setCategory: (value:Category|undefined) => void
 }
 
 interface formValues {
     name: string
 }
 
-export const CategoryModal:React.FC<CategoryModalProps> = ({ category, open, setOpen }) => {
+export const CategoryModal:React.FC<CategoryModalProps> = ({ category, open, setOpen, setCategory }) => {
     const [loading, setLoading] = useState(false)
 
     const colors = useColors()
@@ -51,10 +52,15 @@ export const CategoryModal:React.FC<CategoryModalProps> = ({ category, open, set
         }, ()=>null, 
         () => setLoading(false))
     }
+
+    const closeModal = () => {
+        setOpen(false)
+        setCategory(undefined)
+    }
     
     return (
         <>
-            <Dialog open={open} onClose={() => setOpen(false)} PaperProps={{style:{width: '100%', backgroundColor: colors.background}}}
+            <Dialog open={open} onClose={() => closeModal()} PaperProps={{style:{width: '100%', backgroundColor: colors.background}}}
                 // disableEscapeKeyDown={true}
                 // hideBackdrop={true}
                 
@@ -69,7 +75,7 @@ export const CategoryModal:React.FC<CategoryModalProps> = ({ category, open, set
 
                     </DialogContent>
                     <DialogActions sx={{justifyContent: 'space-evenly', marginBottom: isMobile ? '5vw' : '1vw'}}>
-                        <Button variant='outlined' onClick={() => setOpen(false)} >Cancelar</Button>
+                        <Button variant='outlined' onClick={() => closeModal()} >Cancelar</Button>
                         <Button type='submit' variant='contained' >{loading ? 
                         <CircularProgress size={24} />
                             : 'OK'}</Button>
