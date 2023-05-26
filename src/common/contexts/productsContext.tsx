@@ -1,14 +1,14 @@
 import { createContext, useState } from 'react';
 import React from 'react';
 import { useEffect } from 'react';
-import { api } from '../../api';
 
 export interface Product {
     id: number
     name: string
     description: string
-    price: number
+    price: number | string
     category: number
+    subcategory: number
 }
 
 interface ProductsContextValue {

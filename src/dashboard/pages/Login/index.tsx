@@ -4,13 +4,14 @@ import Button from '@mui/material/Button';
 import { CircularProgress } from "@mui/material"
 import { Formik, Form } from 'formik';
 import type { FormikHelpers } from 'formik';
-import { api } from '../../../api';
 import './style.scss';
 import { useUser } from '../../hooks/useUser';
 import { useNavigate } from 'react-router-dom';
 import Alert from '@mui/material/Alert';
 import Snackbar from '@mui/material/Snackbar';
 import { useMuiTheme } from '../../../hooks/useMuiTheme';
+import { useApi } from '../../../common/hooks/useApi';
+import { User } from '../../contexts/userContext';
 
 interface formValues {
     user: string
@@ -23,6 +24,7 @@ export const Login = () => {
 
     const { setUser } = useUser()
     const navigate = useNavigate()
+    const api = useApi()
 
     const initialValues:formValues = {
         user: '',
@@ -34,20 +36,17 @@ export const Login = () => {
         setLoading(true)
         setLoginError('')
 
-        api.post('/login', values)
-        .then(response => {
+        api.login(values, (response: { data: User | null }) => {
             if(response.data) {
                 setUser(response.data)
                 navigate('/dashboard/panel')
             } else {
                 setLoginError('usuário ou senha inválidos')
             }
-        })
-        .catch(error => {
+        }, (error: any) => {
             console.error(error)
             setLoginError('erro interno')
-        })
-        .finally(() => setLoading(false))
+        }, () => setLoading(false))
     }, [loading])
     
     return (

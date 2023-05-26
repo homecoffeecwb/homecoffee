@@ -1,14 +1,13 @@
 import { useContext } from 'react'
-import { api } from '../../api';
-import ProductsContext from '../contexts/productsContext'
+import ProductsContext, { Product } from '../contexts/productsContext'
+import { useApi } from './useApi';
 
 export const useProducts = () => {
     const productsContext = useContext(ProductsContext);
+    const api = useApi()
 
     const refreshProducts = () => {
-        api.get('/products')
-        .then(response => productsContext.setValue(response.data))
-        .catch(error => console.error(error))
+        api.products.get((response: { data: Product[] }) => productsContext.setValue(response.data), (error: any) => console.error(error))
     }
 
     return {products: productsContext.value, setProducts: productsContext.setValue, refreshProducts}

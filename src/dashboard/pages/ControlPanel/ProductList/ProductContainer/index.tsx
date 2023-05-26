@@ -8,13 +8,13 @@ import { IconButton } from '@mui/material';
 import { ProductModal } from '../../../../components/ProductModal';
 import { useState } from 'react';
 import { useColors } from '../../../../../hooks/useColors';
-import { api } from '../../../../../api';
 import { useProducts } from '../../../../../common/hooks/useProducts';
 import { useSnackbar } from '../../../../hooks/useSnackbar';
 import CurrencyFormat from 'react-currency-format';
 import { CurrencyText } from '../../../../../common/components/CurrencyText';
 import { DeleteConfirm } from './DeleteConfirm';
 import { useEffect } from 'react';
+import { useApi } from '../../../../../common/hooks/useApi';
 
 interface ProductsContainerProps {
     product: Product
@@ -24,6 +24,7 @@ export const ProductContainer:React.FC<ProductsContainerProps> = ({ product }) =
     const colors = useColors()
     const { refreshProducts } = useProducts()
     const snackbar = useSnackbar()
+    const api = useApi()
     
     const [editModal, setEditModal] = useState(false)
     const [deleteModal, setDeleteModal] = useState(false)
@@ -41,15 +42,12 @@ export const ProductContainer:React.FC<ProductsContainerProps> = ({ product }) =
         if (confirmDeletion) {
             setConfirmDeletion(false)
 
-            api.post('/products/delete', product)
-            .then(response => {
+            api.products.delete(product, () => {
                 snackbar({
                     text: `produto ${product.name} deletado!`,
                     severity: 'warning'
                 })
-            })
-            .catch(error => console.error(error))
-            .finally(() => refreshProducts())
+            }, () => null, () => refreshProducts())
         }
     }, [confirmDeletion])
     

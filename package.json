@@ -22,6 +22,7 @@
     "formik": "^2.2.9",
     "qrcode.react": "^3.1.0",
     "react": "^18.2.0",
+    "react-collapsible": "^2.10.0",
     "react-currency-format": "^1.1.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.10.0",
