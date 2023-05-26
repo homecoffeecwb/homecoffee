@@ -1,13 +1,14 @@
+import { ThemeProvider } from "@mui/material";
+import React from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { LanguageProvider } from "./common/contexts/LanguageContext";
+import { ProductsProvider } from "./common/contexts/productsContext";
+import { Dashboard } from "./dashboard/pages/Dashboard";
+import { useMuiTheme } from "./hooks/useMuiTheme";
+import Main from "./menu/pages/Main";
+
 import "./sass/App.scss";
 import "./sass/mui.scss";
-import React from "react";
-import { Routes, BrowserRouter, Route } from "react-router-dom";
-import { useMuiTheme } from "./hooks/useMuiTheme";
-import { ThemeProvider } from "@mui/material";
-import { Dashboard } from "./dashboard/pages/Dashboard";
-import { ProductsProvider } from "./common/contexts/productsContext";
-import { LanguageProvider } from "./common/contexts/LanguageContext";
-import Main from "./menu/pages/Main";
 import { CategoriesProvider } from "./common/contexts/categoriesContext";
 
 const App = () => {

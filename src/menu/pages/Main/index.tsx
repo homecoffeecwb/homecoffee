@@ -1,5 +1,6 @@
 import {Box} from "@mui/material";
 import React from "react";
+import CategoriesNavbar from "../../components/CategoriesNavbar";
 import Header from "../../components/Header";
 
 interface MainProps {}
@@ -11,6 +12,7 @@ const Main: React.FunctionComponent<MainProps> = () => {
   return (
     <Box display={"flex"} flexDirection="column" justifyContent={"flex-top"} >
 			<Header />
+			<CategoriesNavbar/>
 		</Box>
   );
 };
