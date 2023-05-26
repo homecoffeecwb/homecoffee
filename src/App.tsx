@@ -6,8 +6,10 @@ import { ProductsProvider } from "./common/contexts/productsContext";
 import { Dashboard } from "./dashboard/pages/Dashboard";
 import { useMuiTheme } from "./hooks/useMuiTheme";
 import Main from "./menu/pages/Main";
+
 import "./sass/App.scss";
 import "./sass/mui.scss";
+import { CategoriesProvider } from "./common/contexts/categoriesContext";
 
 const App = () => {
   const muiTheme = useMuiTheme();
@@ -15,14 +17,16 @@ const App = () => {
   return (
     <LanguageProvider>
       <ThemeProvider theme={muiTheme}>
-        <ProductsProvider>
-          <BrowserRouter>
-            <Routes>
-              <Route index element={<Main />} />
-              <Route path="/dashboard/*" element={<Dashboard />} />
-            </Routes>
-          </BrowserRouter>
-        </ProductsProvider>
+        <CategoriesProvider>
+            <ProductsProvider>
+                <BrowserRouter>
+                    <Routes>
+                    <Route index element={<Main />} />
+                    <Route path="/dashboard/*" element={<Dashboard />} />
+                    </Routes>
+                </BrowserRouter>
+            </ProductsProvider>
+        </CategoriesProvider>
       </ThemeProvider>
     </LanguageProvider>
   );

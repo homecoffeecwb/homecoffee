@@ -10,13 +10,13 @@ import { Form, Formik } from 'formik';
 import React from 'react';
 import { useState } from 'react';
 import MaskedInput from 'react-text-mask';
-import { api } from '../../../api';
 import { Product } from '../../../common/contexts/productsContext';
 import { useCategories } from '../../../common/hooks/useCategories';
 import { useCurrencyMask } from '../../../common/hooks/useCurrencyMask';
 import { useProducts } from '../../../common/hooks/useProducts';
 import { useColors } from '../../../hooks/useColors';
 import { useSnackbar } from '../../hooks/useSnackbar';
+import { useApi } from '../../../common/hooks/useApi';
 
 interface ProductModalProps {
     product: Product
@@ -29,6 +29,7 @@ interface formValues {
     description: string
     price: string
     category: number
+    subcategory: number
 }
 
 export const ProductModal:React.FC<ProductModalProps> = ({ product, open, setOpen }) => {
@@ -37,20 +38,21 @@ export const ProductModal:React.FC<ProductModalProps> = ({ product, open, setOpe
     const currencyMask = useCurrencyMask()
     const colors = useColors()
     const { refreshProducts } = useProducts()
-    const categories = useCategories()
+    const { categories } = useCategories()
     const snackbar = useSnackbar()
     const isMobile = useMediaQuery('(orientation: portrait)')
+    const api = useApi()
 
     const initialValues:formValues = {
         name: product?.name || '',
         description: product?.description || '',
-        price: product?.price?.toString() || '',
-        category: product?.category || 0,
+        price: product?.price?.toString().replace('.', ',') || '',
+        category: product?.category || 1,
+        subcategory: product?.subcategory || 1,
     }
 
     const handleSubmit = (values:formValues) => {
-        api.post('/products/update', {...values, id: product.id})
-        .then(response => {
+        api.products.update({...values, id: product.id}, (response: { data: Product[] }) => {
             console.log(response.data)
             setOpen(false)
             refreshProducts()
@@ -58,8 +60,7 @@ export const ProductModal:React.FC<ProductModalProps> = ({ product, open, setOpe
                 text: `${product.name} atualizado!`,
                 severity: 'success'
             })
-        })
-        .catch(error => console.error(error))
+        }, (error: any) => console.error(error))
     }
     
     return (
@@ -80,6 +81,12 @@ export const ProductModal:React.FC<ProductModalProps> = ({ product, open, setOpe
                                 value={category.id}
                                 style={{width: '100%'}}
                             >{category.name['PT']}</MenuItem>)}
+                        </TextField>
+                        <TextField select id='subcategory' name='subcategory' label='Sub-categoria' onChange={handleChange} value={values.subcategory} >
+                            {categories.filter(category => category.id == values.category)[0].subcategories.map(subcategory => <MenuItem key={subcategory.id}
+                                value={subcategory.id}
+                                style={{width: '100%'}}
+                            >{subcategory.name}</MenuItem>)}
                         </TextField>
 
                         <TextField label='Nome' id='name' value={values.name} onChange={handleChange} variant='standard' />

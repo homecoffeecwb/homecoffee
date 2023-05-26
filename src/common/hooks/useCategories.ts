@@ -1,34 +1,8 @@
-export type Category = {
-	id: number;
-	name: {
-		[Key: string]: string;
-	}
-}
+import { useContext } from 'react'
+import CategoriesContext from '../contexts/categoriesContext'
 
 export const useCategories = () => {
-    const categories: Category[] = [
-        {
-            id: 0,
-            name: {
-							PT: 'Bebidas',
-							EN: 'Drinks',
-						},
-        },
-        {
-            id: 1,
-            name: {
-							PT: 'Comidas',
-							EN: 'Food',
-						},
-        },
-        {
-            id: 2,
-            name: {
-							PT: 'Doces',
-							EN: 'Sweet',
-						},
-        },
-    ]
+    const categoriesContext = useContext(CategoriesContext);
 
-    return categories
+    return {categories: categoriesContext.value, setCategories: categoriesContext.setValue}
 }

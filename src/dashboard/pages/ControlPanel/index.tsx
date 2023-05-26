@@ -10,6 +10,7 @@ import { NewProduct } from './NewProduct';
 import { ProductList } from './ProductList';
 import './style.scss';
 import { Header } from './Header';
+import { Categories } from './Categories';
 
 export const ControlPanel = () => {
     const snackbar = useContext(SnackbarContext)
@@ -30,6 +31,7 @@ export const ControlPanel = () => {
             <ReactSlideRoutes duration={1000}>
                 <Route index element={<ProductList />} />
                 <Route path='/novo' element={<NewProduct />} />
+                <Route path='/categorias' element={<Categories />} />
             </ReactSlideRoutes>
         </div>
     )

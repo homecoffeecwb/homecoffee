@@ -13,9 +13,9 @@ import { useHeader } from '../../../hooks/useHeader';
 
 export const ProductList = () => {
     const {products, refreshProducts} = useProducts()
-    const [category, setCategory] = useState(0)
+    const [category, setCategory] = useState(1)
     
-    const categories = useCategories()
+    const { categories } = useCategories()
     const navigate = useNavigate()
     const header = useHeader()
 

@@ -1,0 +1,38 @@
+@import '/src/sass/colors';
+
+.Categories-Page {
+    flex-direction: column;
+    width: 100%;
+
+    .Collapsible {
+        flex-direction: column;
+        gap: 3vw;
+        
+        .Collapsible__contentInner {
+            flex-direction: column;
+            width: 100%;
+            gap: 3vw;
+            align-items: center;
+            padding-bottom: 3vw;
+        }
+
+    }
+
+    .CategoryContainer-Component {
+        align-items: center;
+        gap: 3vw;
+        width: 100%;
+        padding: 3vw;
+        background-color: darken($background-color, 10);
+        
+        svg {
+            transition: 0.5s;
+        }
+    }   
+    
+    .SubcategoryContainer-Component {
+        width: 70%;
+        padding: 2vw;
+        background-color: darken($background-color, 10);
+    }
+}

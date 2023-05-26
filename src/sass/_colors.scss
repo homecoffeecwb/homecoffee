@@ -11,5 +11,6 @@ $red: #E12454;
     primary2: $primary2-color;
     secondary: $secondary-color;
     background: $background-color;
+    background_dark: darken($background-color, 2);
     red: $red;
 }
