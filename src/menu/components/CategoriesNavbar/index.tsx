@@ -16,30 +16,29 @@ const CategoriesNavbar: React.FunctionComponent<CategoriesNavbarProps> = () => {
   const categories = useCategories();
   const [category, setCategory] = React.useState<number>(categories[0].id);
 
-	const handleChange = React.useCallback((_e: React.SyntheticEvent, newValue: number) => {
-		setCategory(newValue)
-	}, [])
+  const handleChange = React.useCallback(
+    (_e: React.SyntheticEvent, newValue: number) => {
+      setCategory(newValue);
+    },
+    []
+  );
 
   return (
     <div>
-      <AppBar position="static" variant="elevation" elevation={0} color="transparent">
+      <AppBar position="static" variant="outlined" color="transparent">
         <Tabs
           value={category}
           onChange={handleChange}
           aria-label={getAria("categoriesNavbar")}
-					indicatorColor="primary"
-					variant="fullWidth"
+          indicatorColor="primary"
+          variant="fullWidth"
           centered
         >
           {categories.map((c) => (
-            <Tab
-              key={c.id}
-              label={c.name[language.current]}
-            />
+            <Tab key={c.id} label={c.name[language.current]} />
           ))}
         </Tabs>
       </AppBar>
-			{}
     </div>
   );
 };
