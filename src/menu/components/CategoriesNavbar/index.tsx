@@ -14,10 +14,10 @@ interface CategoriesNavbarProps {
  * stored in the Dashboard
  */
 const CategoriesNavbar: React.FunctionComponent<CategoriesNavbarProps> = () => {
-  const categories = useCategories();
+  const { categories } = useCategories();
   const { products } = useProducts();
-  const [category, setCategory] = React.useState<number>(categories[0].id);
-  const { language, getAria } = useLanguage();
+  const [category, setCategory] = React.useState<number>(1);
+  const { getAria } = useLanguage();
 
   const handleChange = React.useCallback(
     (_e: React.SyntheticEvent, newValue: number) => {
@@ -27,8 +27,9 @@ const CategoriesNavbar: React.FunctionComponent<CategoriesNavbarProps> = () => {
   );
 
   React.useEffect(() => {
-    console.log(products);
-  }, []);
+    if (categories.length === 0) return;
+    setCategory(categories[0]?.id);
+  }, [categories]);
 
   return (
     <div>
@@ -38,18 +39,20 @@ const CategoriesNavbar: React.FunctionComponent<CategoriesNavbarProps> = () => {
         elevation={0}
         color="transparent"
       >
-        <Tabs
-          value={category}
-          onChange={handleChange}
-          aria-label={getAria("categoriesNavbar")}
-          indicatorColor="primary"
-          variant="fullWidth"
-          centered
-        >
-          {categories.map((c) => (
-            <Tab key={c.id} label={c.name[language.current]} />
-          ))}
-        </Tabs>
+        {categories.length > 0 && (
+          <Tabs
+            value={category}
+            onChange={handleChange}
+            aria-label={getAria("categoriesNavbar")}
+            indicatorColor="primary"
+            variant="fullWidth"
+            centered
+          >
+            {categories.map((c) => (
+              <Tab value={c.id} key={c.id} label={c.name} />
+            ))}
+          </Tabs>
+        )}
       </AppBar>
       <div className="list-container">
         {products
