@@ -10,26 +10,30 @@ import Main from "./menu/pages/Main";
 import "./sass/App.scss";
 import "./sass/mui.scss";
 import { CategoriesProvider } from "./common/contexts/categoriesContext";
+import { Snackbar, SnackbarProvider } from "burgos-snackbar"
 
 const App = () => {
-  const muiTheme = useMuiTheme();
+    const muiTheme = useMuiTheme()
 
-  return (
-    <LanguageProvider>
-      <ThemeProvider theme={muiTheme}>
-        <CategoriesProvider>
-            <ProductsProvider>
-                <BrowserRouter>
-                    <Routes>
-                    <Route index element={<Main />} />
-                    <Route path="/dashboard/*" element={<Dashboard />} />
-                    </Routes>
-                </BrowserRouter>
-            </ProductsProvider>
-        </CategoriesProvider>
-      </ThemeProvider>
-    </LanguageProvider>
-  );
-};
+    return (
+        <SnackbarProvider>
+            <LanguageProvider>
+                <ThemeProvider theme={muiTheme}>
+                    <CategoriesProvider>
+                        <ProductsProvider>
+                            <BrowserRouter>
+                                <Snackbar />
+                                <Routes>
+                                    <Route index element={<Main />} />
+                                    <Route path="/dashboard/*" element={<Dashboard />} />
+                                </Routes>
+                            </BrowserRouter>
+                        </ProductsProvider>
+                    </CategoriesProvider>
+                </ThemeProvider>
+            </LanguageProvider>
+        </SnackbarProvider>
+    )
+}
 
 export default App;

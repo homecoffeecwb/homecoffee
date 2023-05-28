@@ -7,11 +7,11 @@ import type { FormikHelpers } from 'formik';
 import './style.scss';
 import { useUser } from '../../hooks/useUser';
 import { useNavigate } from 'react-router-dom';
-import Alert from '@mui/material/Alert';
-import Snackbar from '@mui/material/Snackbar';
-import { useMuiTheme } from '../../../hooks/useMuiTheme';
-import { useApi } from '../../../common/hooks/useApi';
-import { User } from '../../contexts/userContext';
+import Alert from "@mui/material/Alert"
+import { useMuiTheme } from "../../../hooks/useMuiTheme"
+import { useApi } from "../../../common/hooks/useApi"
+import { User } from "../../contexts/userContext"
+import { useSnackbar } from "burgos-snackbar"
 
 interface formValues {
     user: string
@@ -20,59 +20,69 @@ interface formValues {
 
 export const Login = () => {
     const [loading, setLoading] = useState(false)
-    const [loginError, setLoginError] = useState('')
 
     const { setUser } = useUser()
+    const { snackbar } = useSnackbar()
     const navigate = useNavigate()
     const api = useApi()
 
-    const initialValues:formValues = {
-        user: '',
-        password: ''
+    const initialValues: formValues = {
+        user: "",
+        password: "",
     }
 
-    const handleSubmit = React.useCallback((values:formValues, helpers: FormikHelpers<formValues>) => {
-        if (loading) return;
-        setLoading(true)
-        setLoginError('')
+    const handleSubmit = React.useCallback(
+        (values: formValues, helpers: FormikHelpers<formValues>) => {
+            if (loading) return
+            setLoading(true)
 
-        api.login(values, (response: { data: User | null }) => {
-            if(response.data) {
-                setUser(response.data)
-                navigate('/dashboard/panel')
-            } else {
-                setLoginError('usuário ou senha inválidos')
-            }
-        }, (error: any) => {
-            console.error(error)
-            setLoginError('erro interno')
-        }, () => setLoading(false))
-    }, [loading])
-    
+            api.login(
+                values,
+                (response: { data: User | null }) => {
+                    if (response.data) {
+                        setUser(response.data)
+                        navigate("/dashboard/panel")
+                    } else {
+                        snackbar({ severity: "error", text: "usuário ou senha inválidos" })
+                    }
+                },
+                (error: any) => {
+                    console.error(error)
+                    snackbar({ severity: "error", text: "erro interno" })
+                },
+                () => setLoading(false)
+            )
+        },
+        [loading]
+    )
+
     return (
-        <div className='Login-Page' >
+        <div className="Login-Page">
             <Formik initialValues={initialValues} onSubmit={handleSubmit}>
-                {({values, handleChange}) => 
-                <Form>
-                    <img className='logo' src='/images/logo.png' alt='logo.png' />
-                    {/* <h2 className='title' >login</h2> */}
-                    <TextField label='usuário ou e-mail' id='user' value={values.user} onChange={handleChange} color='primary' />
-                    <TextField label='senha' type='password' id='password' value={values.password} onChange={handleChange} />
-                    <Button type='submit' variant="contained" >
-                        {
-                            loading ?
-                            <CircularProgress size={'1.5rem'} color={'secondary'} />
-                            :
-                            <>Entrar</>
-                        }
-                    </Button>
-                </Form>}
+                {({ values, handleChange }) => (
+                    <Form>
+                        <img className="logo" src="/images/logo.png" alt="logo.png" />
+                        {/* <h2 className='title' >login</h2> */}
+                        <TextField
+                            label="usuário ou e-mail"
+                            id="user"
+                            value={values.user}
+                            onChange={handleChange}
+                            color="primary"
+                        />
+                        <TextField
+                            label="senha"
+                            type="password"
+                            id="password"
+                            value={values.password}
+                            onChange={handleChange}
+                        />
+                        <Button type="submit" variant="contained">
+                            {loading ? <CircularProgress size={"1.5rem"} color={"secondary"} /> : <>Entrar</>}
+                        </Button>
+                    </Form>
+                )}
             </Formik>
-            <Snackbar open={Boolean(loginError)} autoHideDuration={3000} onClose={() => setLoginError('')} anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}>
-                <Alert onClose={() => setLoginError('')} severity={'error'} sx={{ width: '100%' }}>
-                    {loginError}
-                </Alert>
-            </Snackbar>
         </div>
     )
 }
